@@ -82,16 +82,16 @@ CREATE TABLE [Images] (
 GO
 
 CREATE TABLE [Images_To_Advert] (
-	ACode integer,
 	ICode integer,
+	ACode integer,
   CONSTRAINT [PK_IMAGES_TO_ADVERT] PRIMARY KEY CLUSTERED
   (
-  [ACode] ASC
+  [ICode] ASC
   ) WITH (IGNORE_DUP_KEY = OFF)
 
 )
 GO
-ALTER TABLE [Images_To_Advert] WITH CHECK ADD CONSTRAINT [Images_To_Advert_fk1] FOREIGN KEY ([ICode]) REFERENCES [Images]([ICode])
+ALTER TABLE [Images_To_Advert] WITH CHECK ADD CONSTRAINT [Images_To_Advert_fk1] FOREIGN KEY ([ACode]) REFERENCES [Advert]([ACode])
 ON UPDATE CASCADE
 GO
 ALTER TABLE [Images_To_Advert] CHECK CONSTRAINT [Images_To_Advert_fk1]
@@ -114,22 +114,6 @@ GO
 ALTER TABLE [City] CHECK CONSTRAINT [City_fk0]
 GO
 
-CREATE TABLE [User_To_Advert] (
-	UCode integer,
-	ACode integer,
-  CONSTRAINT [PK_USER_TO_ADVERT] PRIMARY KEY CLUSTERED
-  (
-  [UCode] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
-)
-GO
-ALTER TABLE [User_To_Advert] WITH CHECK ADD CONSTRAINT [User_To_Advert_fk1] FOREIGN KEY ([ACode]) REFERENCES [Advert]([ACode])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [User_To_Advert] CHECK CONSTRAINT [User_To_Advert_fk1]
-GO
-
 CREATE TABLE [Notification] (
 	NCode integer,
 	AuthorCode integer,
@@ -146,4 +130,20 @@ ALTER TABLE [Notification] WITH CHECK ADD CONSTRAINT [Notification_fk1] FOREIGN 
 ON UPDATE CASCADE
 GO
 ALTER TABLE [Notification] CHECK CONSTRAINT [Notification_fk1]
+GO
+
+CREATE TABLE [Favorites] (
+	UCode integer,
+	ACode integer,
+  CONSTRAINT [PK_FAVORITES] PRIMARY KEY CLUSTERED
+  (
+  [UCode] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+ALTER TABLE [Favorites] WITH CHECK ADD CONSTRAINT [Favorites_fk1] FOREIGN KEY ([ACode]) REFERENCES [Advert]([ACode])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Favorites] CHECK CONSTRAINT [Favorites_fk1]
 GO
