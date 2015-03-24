@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SmekayModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Хранилище SmekayModelContainer">
+          <EntitySet Name="Advert" EntityType="Хранилище SmekayModel.Advert" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Advert_Category" EntityType="Хранилище SmekayModel.Advert_Category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="City" EntityType="Хранилище SmekayModel.City" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Countries" EntityType="Хранилище SmekayModel.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Favorites" EntityType="Хранилище SmekayModel.Favorites" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Images" EntityType="Хранилище SmekayModel.Images" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Images_To_Advert" EntityType="Хранилище SmekayModel.Images_To_Advert" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="Хранилище SmekayModel.Notification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="Хранилище SmekayModel.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="Advert_fk2" Association="Хранилище SmekayModel.Advert_fk2">
+            <End Role="Advert_Category" EntitySet="Advert_Category" />
+            <End Role="Advert" EntitySet="Advert" />
+          </AssociationSet>
+          <AssociationSet Name="City_fk0" Association="Хранилище SmekayModel.City_fk0">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="Favorites_fk1" Association="Хранилище SmekayModel.Favorites_fk1">
+            <End Role="Advert" EntitySet="Advert" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="Images_To_Advert_fk1" Association="Хранилище SmekayModel.Images_To_Advert_fk1">
+            <End Role="Advert" EntitySet="Advert" />
+            <End Role="Images_To_Advert" EntitySet="Images_To_Advert" />
+          </AssociationSet>
+          <AssociationSet Name="Notification_fk1" Association="Хранилище SmekayModel.Notification_fk1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="Users_fk0" Association="Хранилище SmekayModel.Users_fk0">
+            <End Role="City" EntitySet="City" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Advert">
+          <Key>
+            <PropertyRef Name="ACode" />
+          </Key>
+          <Property Name="ACode" Type="int" Nullable="false" />
+          <Property Name="UCode" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CCode" Type="int" />
+          <Property Name="ACCode" Type="int" />
+          <Property Name="Contact" Type="text" />
+          <Property Name="Phone" Type="text" />
+          <Property Name="Email" Type="text" />
+          <Property Name="Title" Type="text" />
+          <Property Name="Description" Type="text" />
+          <Property Name="History" Type="text" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Advert_Category">
+          <Key>
+            <PropertyRef Name="ACCode" />
+          </Key>
+          <Property Name="ACCode" Type="int" Nullable="false" />
+          <Property Name="Name" Type="text" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CCode" />
+          </Key>
+          <Property Name="CCode" Type="int" Nullable="false" />
+          <Property Name="Name" Type="text" />
+          <Property Name="CoCode" Type="int" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CoCode" />
+          </Key>
+          <Property Name="CoCode" Type="int" Nullable="false" />
+          <Property Name="Country" Type="text" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="UCode" />
+          </Key>
+          <Property Name="UCode" Type="int" Nullable="false" />
+          <Property Name="ACode" Type="int" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ICode" />
+          </Key>
+          <Property Name="ICode" Type="binary" Nullable="false" MaxLength="1" />
+          <Property Name="Url" Type="text" />
+        </EntityType>
+        <EntityType Name="Images_To_Advert">
+          <Key>
+            <PropertyRef Name="ICode" />
+          </Key>
+          <Property Name="ICode" Type="int" Nullable="false" />
+          <Property Name="ACode" Type="int" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NCode" />
+          </Key>
+          <Property Name="NCode" Type="int" Nullable="false" />
+          <Property Name="AuthorCode" Type="int" />
+          <Property Name="RecipientCode" Type="int" />
+          <Property Name="Content" Type="text" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UCode" />
+          </Key>
+          <Property Name="UCode" Type="int" Nullable="false" />
+          <Property Name="CCode" Type="int" />
+          <Property Name="Name" Type="text" />
+          <Property Name="Phone" Type="text" />
+          <Property Name="Password" Type="text" />
+          <Property Name="Email" Type="text" />
+          <Property Name="News" Type="int" />
+          <Property Name="Reminders" Type="int" />
+          <Property Name="Notifications" Type="int" />
+        </EntityType>
+        <Association Name="Advert_fk2">
+          <End Role="Advert_Category" Type="Хранилище SmekayModel.Advert_Category" Multiplicity="0..1" />
+          <End Role="Advert" Type="Хранилище SmekayModel.Advert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advert_Category">
+              <PropertyRef Name="ACCode" />
+            </Principal>
+            <Dependent Role="Advert">
+              <PropertyRef Name="ACCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="City_fk0">
+          <End Role="Countries" Type="Хранилище SmekayModel.Countries" Multiplicity="0..1" />
+          <End Role="City" Type="Хранилище SmekayModel.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CoCode" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CoCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Favorites_fk1">
+          <End Role="Advert" Type="Хранилище SmekayModel.Advert" Multiplicity="0..1" />
+          <End Role="Favorites" Type="Хранилище SmekayModel.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advert">
+              <PropertyRef Name="ACode" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="ACode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Images_To_Advert_fk1">
+          <End Role="Advert" Type="Хранилище SmekayModel.Advert" Multiplicity="0..1" />
+          <End Role="Images_To_Advert" Type="Хранилище SmekayModel.Images_To_Advert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advert">
+              <PropertyRef Name="ACode" />
+            </Principal>
+            <Dependent Role="Images_To_Advert">
+              <PropertyRef Name="ACode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Notification_fk1">
+          <End Role="Users" Type="Хранилище SmekayModel.Users" Multiplicity="0..1" />
+          <End Role="Notification" Type="Хранилище SmekayModel.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UCode" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="RecipientCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_fk0">
+          <End Role="City" Type="Хранилище SmekayModel.City" Multiplicity="0..1" />
+          <End Role="Users" Type="Хранилище SmekayModel.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CCode" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmekayModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SmekayEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Advert" EntityType="SmekayModel.Advert" />
+          <EntitySet Name="Advert_Category" EntityType="SmekayModel.Advert_Category" />
+          <EntitySet Name="City" EntityType="SmekayModel.City" />
+          <EntitySet Name="Countries" EntityType="SmekayModel.Countries" />
+          <EntitySet Name="Favorites" EntityType="SmekayModel.Favorites" />
+          <EntitySet Name="Images" EntityType="SmekayModel.Images" />
+          <EntitySet Name="Images_To_Advert" EntityType="SmekayModel.Images_To_Advert" />
+          <EntitySet Name="Notification" EntityType="SmekayModel.Notification" />
+          <EntitySet Name="Users" EntityType="SmekayModel.Users" />
+          <AssociationSet Name="Advert_fk2" Association="SmekayModel.Advert_fk2">
+            <End Role="Advert_Category" EntitySet="Advert_Category" />
+            <End Role="Advert" EntitySet="Advert" />
+          </AssociationSet>
+          <AssociationSet Name="Favorites_fk1" Association="SmekayModel.Favorites_fk1">
+            <End Role="Advert" EntitySet="Advert" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="Images_To_Advert_fk1" Association="SmekayModel.Images_To_Advert_fk1">
+            <End Role="Advert" EntitySet="Advert" />
+            <End Role="Images_To_Advert" EntitySet="Images_To_Advert" />
+          </AssociationSet>
+          <AssociationSet Name="City_fk0" Association="SmekayModel.City_fk0">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="Users_fk0" Association="SmekayModel.Users_fk0">
+            <End Role="City" EntitySet="City" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Notification_fk1" Association="SmekayModel.Notification_fk1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Advert">
+          <Key>
+            <PropertyRef Name="ACode" />
+          </Key>
+          <Property Name="ACode" Type="Int32" Nullable="false" />
+          <Property Name="UCode" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CCode" Type="Int32" />
+          <Property Name="ACCode" Type="Int32" />
+          <Property Name="Contact" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="History" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Advert_Category" Relationship="SmekayModel.Advert_fk2" FromRole="Advert" ToRole="Advert_Category" />
+          <NavigationProperty Name="Favorites" Relationship="SmekayModel.Favorites_fk1" FromRole="Advert" ToRole="Favorites" />
+          <NavigationProperty Name="Images_To_Advert" Relationship="SmekayModel.Images_To_Advert_fk1" FromRole="Advert" ToRole="Images_To_Advert" />
+        </EntityType>
+        <EntityType Name="Advert_Category">
+          <Key>
+            <PropertyRef Name="ACCode" />
+          </Key>
+          <Property Name="ACCode" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Advert" Relationship="SmekayModel.Advert_fk2" FromRole="Advert_Category" ToRole="Advert" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CCode" />
+          </Key>
+          <Property Name="CCode" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="CoCode" Type="Int32" />
+          <NavigationProperty Name="Countries" Relationship="SmekayModel.City_fk0" FromRole="City" ToRole="Countries" />
+          <NavigationProperty Name="Users" Relationship="SmekayModel.Users_fk0" FromRole="City" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CoCode" />
+          </Key>
+          <Property Name="CoCode" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="City" Relationship="SmekayModel.City_fk0" FromRole="Countries" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="UCode" />
+          </Key>
+          <Property Name="UCode" Type="Int32" Nullable="false" />
+          <Property Name="ACode" Type="Int32" />
+          <NavigationProperty Name="Advert" Relationship="SmekayModel.Favorites_fk1" FromRole="Favorites" ToRole="Advert" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ICode" />
+          </Key>
+          <Property Name="ICode" Type="Binary" Nullable="false" MaxLength="1" FixedLength="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Images_To_Advert">
+          <Key>
+            <PropertyRef Name="ICode" />
+          </Key>
+          <Property Name="ICode" Type="Int32" Nullable="false" />
+          <Property Name="ACode" Type="Int32" />
+          <NavigationProperty Name="Advert" Relationship="SmekayModel.Images_To_Advert_fk1" FromRole="Images_To_Advert" ToRole="Advert" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NCode" />
+          </Key>
+          <Property Name="NCode" Type="Int32" Nullable="false" />
+          <Property Name="AuthorCode" Type="Int32" />
+          <Property Name="RecipientCode" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="SmekayModel.Notification_fk1" FromRole="Notification" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UCode" />
+          </Key>
+          <Property Name="UCode" Type="Int32" Nullable="false" />
+          <Property Name="CCode" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="News" Type="Int32" />
+          <Property Name="Reminders" Type="Int32" />
+          <Property Name="Notifications" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="SmekayModel.Users_fk0" FromRole="Users" ToRole="City" />
+          <NavigationProperty Name="Notification" Relationship="SmekayModel.Notification_fk1" FromRole="Users" ToRole="Notification" />
+        </EntityType>
+        <Association Name="Advert_fk2">
+          <End Role="Advert_Category" Type="SmekayModel.Advert_Category" Multiplicity="0..1" />
+          <End Role="Advert" Type="SmekayModel.Advert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advert_Category">
+              <PropertyRef Name="ACCode" />
+            </Principal>
+            <Dependent Role="Advert">
+              <PropertyRef Name="ACCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Favorites_fk1">
+          <End Role="Advert" Type="SmekayModel.Advert" Multiplicity="0..1" />
+          <End Role="Favorites" Type="SmekayModel.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advert">
+              <PropertyRef Name="ACode" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="ACode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Images_To_Advert_fk1">
+          <End Role="Advert" Type="SmekayModel.Advert" Multiplicity="0..1" />
+          <End Role="Images_To_Advert" Type="SmekayModel.Images_To_Advert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advert">
+              <PropertyRef Name="ACode" />
+            </Principal>
+            <Dependent Role="Images_To_Advert">
+              <PropertyRef Name="ACode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="City_fk0">
+          <End Role="Countries" Type="SmekayModel.Countries" Multiplicity="0..1" />
+          <End Role="City" Type="SmekayModel.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CoCode" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CoCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Users_fk0">
+          <End Role="City" Type="SmekayModel.City" Multiplicity="0..1" />
+          <End Role="Users" Type="SmekayModel.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CCode" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Notification_fk1">
+          <End Role="Users" Type="SmekayModel.Users" Multiplicity="0..1" />
+          <End Role="Notification" Type="SmekayModel.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UCode" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="RecipientCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SmekayModelContainer" CdmEntityContainer="SmekayEntities">
+          <EntitySetMapping Name="Advert">
+            <EntityTypeMapping TypeName="SmekayModel.Advert">
+              <MappingFragment StoreEntitySet="Advert">
+                <ScalarProperty Name="ACode" ColumnName="ACode" />
+                <ScalarProperty Name="UCode" ColumnName="UCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CCode" ColumnName="CCode" />
+                <ScalarProperty Name="ACCode" ColumnName="ACCode" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Advert_Category">
+            <EntityTypeMapping TypeName="SmekayModel.Advert_Category">
+              <MappingFragment StoreEntitySet="Advert_Category">
+                <ScalarProperty Name="ACCode" ColumnName="ACCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="SmekayModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CCode" ColumnName="CCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CoCode" ColumnName="CoCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="SmekayModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CoCode" ColumnName="CoCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favorites">
+            <EntityTypeMapping TypeName="SmekayModel.Favorites">
+              <MappingFragment StoreEntitySet="Favorites">
+                <ScalarProperty Name="UCode" ColumnName="UCode" />
+                <ScalarProperty Name="ACode" ColumnName="ACode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="SmekayModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="ICode" ColumnName="ICode" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images_To_Advert">
+            <EntityTypeMapping TypeName="SmekayModel.Images_To_Advert">
+              <MappingFragment StoreEntitySet="Images_To_Advert">
+                <ScalarProperty Name="ICode" ColumnName="ICode" />
+                <ScalarProperty Name="ACode" ColumnName="ACode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification">
+            <EntityTypeMapping TypeName="SmekayModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="NCode" ColumnName="NCode" />
+                <ScalarProperty Name="AuthorCode" ColumnName="AuthorCode" />
+                <ScalarProperty Name="RecipientCode" ColumnName="RecipientCode" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SmekayModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UCode" ColumnName="UCode" />
+                <ScalarProperty Name="CCode" ColumnName="CCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="News" ColumnName="News" />
+                <ScalarProperty Name="Reminders" ColumnName="Reminders" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
