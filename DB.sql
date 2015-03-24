@@ -5,9 +5,9 @@ CREATE TABLE [Users] (
 	Phone text,
 	Password text,
 	Email text,
-	News boolean,
-	Reminders boolean,
-	Notifications boolean,
+	News integer,
+	Reminders integer,
+	Notifications integer,
   CONSTRAINT [PK_USERS] PRIMARY KEY CLUSTERED
   (
   [UCode] ASC
