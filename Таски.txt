@@ -2,7 +2,9 @@
 
 https://docs.google.com/folderview?id=0Bz1CKbfjVCZYfnJfMEV4TElhd3JRSTJnMUdVclVxMUsyWWpKMVRRZTh6bVlWNEZmaERxME0&usp=docslist_api
 
+БД:
 
+http://dbdesigner.net/designer/schema/31
 
 
 1) Проверка обьявлений в админке: 
