@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище SmekayModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище SmekayModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="Хранилище SmekayModelContainer">
           <EntitySet Name="Advert" EntityType="Хранилище SmekayModel.Advert" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Advert_Category" EntityType="Хранилище SmekayModel.Advert_Category" store:Type="Tables" Schema="dbo" />
@@ -114,11 +114,11 @@
           <Key>
             <PropertyRef Name="UCode" />
           </Key>
-          <Property Name="UCode" Type="int" Nullable="false" />
+          <Property Name="UCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CCode" Type="int" />
-          <Property Name="Name" Type="text" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Phone" Type="text" />
-          <Property Name="Password" Type="text" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Email" Type="text" />
           <Property Name="News" Type="int" />
           <Property Name="Reminders" Type="int" />
@@ -196,8 +196,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SmekayModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -322,9 +321,9 @@
           </Key>
           <Property Name="UCode" Type="Int32" Nullable="false" />
           <Property Name="CCode" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="100" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="News" Type="Int32" />
           <Property Name="Reminders" Type="Int32" />
