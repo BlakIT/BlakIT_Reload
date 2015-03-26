@@ -11,9 +11,9 @@ namespace Smekay24.Controllers
         //
         // GET: /Home/
 
-        public string Index()
+        public ActionResult Index()
         {
-            return "BlakIT - Ebashit Smekay";
+            return View();
         }
 
     }
