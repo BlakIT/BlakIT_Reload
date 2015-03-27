@@ -18,6 +18,7 @@
 </head>
 <body>
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-xs-4" >
                 <ul class="topUl">
@@ -35,7 +36,17 @@
             <div class="col-xs-4 col-xs-offset-4" >
                 <ul class="topUl">
                     <li>
-                        <a>@Html.ActionLink("Вход","Login","Login",null,null)</a>
+                        @{
+                            if (Session["CurrentUser"] == null)
+                            {
+                                <a>@Html.ActionLink("Вход","Login","Login",null,null)</a>
+                            }
+                            else
+                            {
+                                <a href="#">@( ((Smekay24.Users)Session["CurrentUser"]).Name )</a>
+                            }
+                            
+                        }
                     </li>
                     <li>
                         <a>Правила</a>
@@ -44,6 +55,95 @@
                         <a>Контакты</a>
                     </li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+                <h1 style="text-align:center;">smekay.center</h1>
+                <h5  style="text-align:center;">Проходите по любому адресу</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-5 col-xs-offset-1" style="border:1px solid black; border-radius:15px; text-align:center;">
+                <div>
+                    <h2>Смекай24.рф</h2>
+                    <h3>Здесь Вы можете продать любой Б\У товар</h3>
+                    <h3>Здесь Вы можете его и купить</h3>
+                    <h3>ВСЕ Б\У ТОВАРЫ ОТ А до Я</h3>
+                </div>
+            </div>
+            <div class="col-xs-4" style="border:1px solid black; border-radius:15px; text-align:center; margin-left:30px;">
+                    <h2>Smekay24.ru</h2>
+                    <h3>Smekay.net</h3>
+                    <h3>Знакомства в вашем городе</h3>
+                    <h3>И ПО ВСЕЙ РОССИИ</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-5 col-xs-offset-1">
+                <a href="#">Подать объявление</a>
+            </div>
+        </div>
+
+        <div class="row">   <!-- Спсок категорий -->
+        </div>
+
+        <div class="row" style="margin-top:10px;">   
+            <div class="col-xs-8 col-xs-offset-2" >
+             <b > Поиск</b> <input style="width:40%;" type="text" name="search" id="search" /> <b style="margin-left:40px;margin-right:40px;">в</b> 
+                @Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>)
+                <input style="margin-left:40px;" type="submit" name="searBut" id="searchBut" value="Поиск"/>
+            </div>
+        </div>
+
+        <div class="row" style=" margin-top:20px;" >
+            <div class="col-xs-8 col-xs-offset-2" >
+                <fieldset>
+                    <legend style="margin-bottom:0; border:0;">Выберите регион</legend>
+    
+                        <div class="row" style="border: 1px solid silver; padding:10px;">
+                        @{
+                            int cols = 0;
+                            string text = "";
+                            foreach(Smekay24.City city in (List<Smekay24.City>)ViewData["cities"])
+                            {
+                                <div class="col-xs-2" style="margin-top:10px;">
+                                    <a href="#">@city.Name</a>
+                                </div>
+
+                                
+                            }
+                        }
+                        </div>
+                    
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-xs-4 col-xs-offset-6" style="border:1px solid silver; border-radius:20px;">
+                <div class="col-xs-10 col-xs-offset-2"><h3 style="margin:0;">Последние обьявления</h3></div>
+
+                @{
+                    foreach (Smekay24.Advert adv in (List<Smekay24.Advert>)ViewData["adverts"])
+                    {
+                        <div class="row" style="border-bottom:1px solid silver;">
+                            <div class="col-xs-6">
+                                <img src="~/css/mob.jpg" style="width:90%;" />
+                            </div>        
+                    
+                            <div class="col-xs-6">
+                                <p>@adv.Title</p>
+                                @adv.Price
+                                <p>@adv.Date</p>
+                            </div>                    
+                        </div> 
+                    }
+                }
+
             </div>
         </div>
     </div>
