@@ -64,6 +64,7 @@
           </Key>
           <Property Name="ACCode" Type="int" Nullable="false" />
           <Property Name="Name" Type="text" />
+          <Property Name="Desc" Type="text" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -263,6 +264,7 @@
           <Property Name="ACCode" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Advert" Relationship="SmekayModel.Advert_fk2" FromRole="Advert_Category" ToRole="Advert" />
+          <Property Type="String" Name="Desc" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -431,6 +433,7 @@
           <EntitySetMapping Name="Advert_Category">
             <EntityTypeMapping TypeName="SmekayModel.Advert_Category">
               <MappingFragment StoreEntitySet="Advert_Category">
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
                 <ScalarProperty Name="ACCode" ColumnName="ACCode" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>

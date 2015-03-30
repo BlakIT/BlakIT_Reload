@@ -141,6 +141,7 @@
     <Compile Include="Images_To_Advert.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryCover.cs" />
     <Compile Include="Notification.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
@@ -191,7 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

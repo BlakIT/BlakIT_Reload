@@ -15,6 +15,20 @@
 
 
     <script src="~/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        .categoryBlock {
+            border:1px solid gray;
+            border-radius:20px;
+            min-height : 200px;
+            /*margin-left: 15px;*/
+        }
+
+        .categoryBlock input{
+            font-size: 12px;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -88,10 +102,10 @@
             </div>
         </div>
 
-        <div class="row">   <!-- Спсок категорий -->
+        <div class="row">   <!-- Список категорий -->
         </div>
 
-        <div class="row" style="margin-top:10px;">   
+        <div class="row" style="margin-top:10px;">    <!-- Поиск -->
             <div class="col-xs-8 col-xs-offset-2" >
              <b > Поиск</b> <input style="width:40%;" type="text" name="search" id="search" /> <b style="margin-left:40px;margin-right:40px;">в</b> 
                 @Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>)
@@ -99,8 +113,8 @@
             </div>
         </div>
 
-        <div class="row" style=" margin-top:20px;" >
-            <div class="col-xs-8 col-xs-offset-2" >
+        <div class="row" style=" margin-top:20px;" >    <!-- Выбор региона -->
+            <div class="col-xs-10 col-xs-offset-1" >
                 <fieldset>
                     <legend style="margin-bottom:0; border:0;">Выберите регион</legend>
     
@@ -123,8 +137,51 @@
             </div>
         </div>
 
-        <div class="row" style="margin-top:30px;">
-            <div class="col-xs-4 col-xs-offset-6" style="border:1px solid silver; border-radius:20px;">
+        <div class="row" style="margin-top:30px;">     <!-- Категории и последние обьявления -->
+
+            <div class="col-xs-6 col-xs-offset-1">
+                
+                @{
+                    List<Smekay24.Models.CategoryCover> list = (List<Smekay24.Models.CategoryCover>)ViewData["categoryAdverts"];
+                    int count = list.Count;
+                    for (int i = 0; i < count; i += 3 )
+                    {
+                        <div class="row">
+                            <div class="col-xs-3 categoryBlock">
+                                <h4>@list[i].Name</h4>
+                                <div class="cat @list[i].Name"></div>
+                                <a href="#" >@list[i].CountAdvert объявлений</a>
+                                <p>@list[i].Desc</p>
+                                <input type="button" value="Подать объявление">
+                            </div>
+
+                            @if( i + 1 < count){
+                            <div class="col-xs-3 col-xs-offset-1  categoryBlock">
+                                <h4>@list[i+1].Name</h4>
+                                <div class="cat @list[i+1].Name"></div>
+                                <a href="#" >@list[i+1].CountAdvert объявлений</a>
+                                <p>@list[i+1].Desc</p>
+                                <input type="button" value="Подать объявление">
+                            </div>
+                            }
+
+                            @if( i + 2 < count){
+                            <div class="col-xs-3 col-xs-offset-1 categoryBlock">
+                                <h4>@list[i+2].Name</h4>
+                                <div class="cat @list[i+2].Name"></div>
+                                <a href="#" >@list[i+2].CountAdvert объявлений</a>
+                                <p>@list[i+2].Desc</p>
+                                <input type="button" value="Подать объявление">
+                            </div>
+                            }
+                        </div>
+                    }
+                }
+                
+
+            </div>
+
+            <div class="col-xs-4" style="border:1px solid silver; border-radius:20px;">
                 <div class="col-xs-10 col-xs-offset-2"><h3 style="margin:0;">Последние обьявления</h3></div>
 
                 @{

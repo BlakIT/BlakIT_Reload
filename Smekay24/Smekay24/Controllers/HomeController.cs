@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smekay24.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,7 +26,8 @@ namespace Smekay24.Controllers
 
             ViewData["category"] = li;
             ViewData["cities"] = getCitiesByCountry(1);
-            ViewData["adverts"] = getAdverts();
+            ViewData["adverts"] = getAdverts().Take(7).ToList();
+            ViewData["categoryAdverts"] = getCategorysCovers();
 
             return View();
         }
@@ -38,6 +40,28 @@ namespace Smekay24.Controllers
         private List<Advert> getAdverts()
         {
             return db.Advert.Select(x => x).OrderBy(x => x.Date).ToList();
+        }
+
+        private int getAdvertsCountInCategory(Advert_Category category)
+        {
+            return db.Advert.Where(x => x.ACCode == category.ACCode).ToList().Count();
+        }
+
+        private List<CategoryCover> getCategorysCovers()
+        {
+            List<CategoryCover> list = new List<CategoryCover>();
+
+            foreach (Advert_Category cat in db.Advert_Category)
+            {
+                list.Add(new CategoryCover() { 
+                    ACCode = cat.ACCode,
+                    CountAdvert = getAdvertsCountInCategory(cat),
+                    Desc = cat.Desc,
+                    Name = cat.Name
+                });
+            }
+
+            return list;
         }
     }
 }
