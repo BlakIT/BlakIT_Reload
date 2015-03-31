@@ -21,14 +21,21 @@
             border:1px solid gray;
             border-radius:20px;
             min-height : 200px;
-            /*margin-left: 15px;*/
+            margin-top: 30px;
         }
 
         .categoryBlock input{
             font-size: 12px;
         }
 
+        .cat {
+            height:60px;
+              background: url("/images/autoCat.jpg") no-repeat;
+            background-size: auto 60px;
+        }
+
     </style>
+
 </head>
 <body>
     <div class="container-fluid">
@@ -97,12 +104,24 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-5 col-xs-offset-1">
+            <div class="col-xs-3 col-xs-offset-1">
                 <a href="#">Подать объявление</a>
+            </div>
+
+            <div class="col-xs-2 ">
+                <p>Всего: <a href="#">@ViewData["allAsvertCount"]</a> объявлений</p>
             </div>
         </div>
 
         <div class="row">   <!-- Список категорий -->
+            <div class="col-xs-11 col-xs-offset-1">
+            @{
+                foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
+                {
+                    <a href="#" style="border-right:1px solid black; margin-left:10px; padding-right:10px;">@cat.Text </a>                     
+                }
+            }
+            </div>
         </div>
 
         <div class="row" style="margin-top:10px;">    <!-- Поиск -->
@@ -189,7 +208,7 @@
                     {
                         <div class="row" style="border-bottom:1px solid silver;">
                             <div class="col-xs-6">
-                                <img src="~/css/mob.jpg" style="width:90%;" />
+                                <img src="~/images/mob.jpg" style="width:90%;" />
                             </div>        
                     
                             <div class="col-xs-6">
@@ -203,6 +222,23 @@
 
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-6">
+                <ul class="topUl">
+                    <li>
+                        <a>Контакты</a>
+                    </li>
+                    <li>
+                        <a>Пользовательское соглашение</a>
+                    </li>
+                    <li>
+                        <a>Политика конфиденциальности</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

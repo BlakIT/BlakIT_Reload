@@ -16,18 +16,19 @@ namespace Smekay24.Controllers
 
         public ActionResult Index()
         {
-            List<SelectListItem> li = new List<SelectListItem>();
+            List<SelectListItem> categories = new List<SelectListItem>();
             int i = 0;
             foreach(Advert_Category ac in db.Advert_Category.ToList())
             {
-                li.Add(new SelectListItem { Text = ac.Name, Value = i.ToString() });
+                categories.Add(new SelectListItem { Text = ac.Name, Value = i.ToString() });
                 i++;
             }
 
-            ViewData["category"] = li;
+            ViewData["category"] = categories;
             ViewData["cities"] = getCitiesByCountry(1);
             ViewData["adverts"] = getAdverts().Take(7).ToList();
             ViewData["categoryAdverts"] = getCategorysCovers();
+            ViewData["allAsvertCount"] = getAllAdversOunt();
 
             return View();
         }
@@ -62,6 +63,11 @@ namespace Smekay24.Controllers
             }
 
             return list;
+        }
+
+        private int getAllAdversOunt()
+        {
+            return db.Advert.Count();
         }
     }
 }
