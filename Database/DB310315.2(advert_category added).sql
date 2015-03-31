@@ -1,0 +1,8 @@
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(2, 'Автомобили', 'Авто, запчасти, компоненты')
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(3, 'Недвижимость', 'Авто, запчасти, компоненты')
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(4, 'Дома, участки', 'Авто, запчасти, компоненты')
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(5, 'Детские товары', 'Авто, запчасти, компоненты')
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(6, 'Одежда, обувь', 'Авто, запчасти, компоненты')
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(7, 'Техника', 'Авто, запчасти, компоненты')
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(8, 'Мебель', 'Авто, запчасти, компоненты')
+insert into Smekay.dbo.Advert_Category (ACCode, Name, [Desc]) values(9, 'Работа', 'Авто, запчасти, компоненты')

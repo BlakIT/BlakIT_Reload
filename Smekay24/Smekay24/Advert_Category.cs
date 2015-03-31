@@ -21,6 +21,7 @@ namespace Smekay24
     
         public int ACCode { get; set; }
         public string Name { get; set; }
+        public string Desc { get; set; }
     
         public virtual ICollection<Advert> Advert { get; set; }
     }

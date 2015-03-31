@@ -1,0 +1,5 @@
+ALTER TABLE Users
+DROP COLUMN Email
+
+ALTER TABLE Users
+ADD Email nvarchar(100)

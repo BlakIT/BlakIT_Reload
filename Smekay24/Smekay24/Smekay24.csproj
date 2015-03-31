@@ -142,8 +142,7 @@
     <Compile Include="Images_To_Advert.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegistrationFormModel.cs" />
-    <Compile Include="Notification.cs">
+<Compile Include="Models\CategoryCover.cs" /><Compile Include="Models\RegistrationFormModel.cs" />    <Compile Include="Notification.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
