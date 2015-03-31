@@ -1,6 +1,6 @@
 ﻿@model Smekay24.WebAPI.UserData
 @{
-    Layout = null;
+    Layout = "~/Views/Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -9,34 +9,61 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
+
+    <style>
+        .editor-blok {
+            width: 400px;
+            margin: 0 -200px;
+        }
+
+        .editor-label {
+            padding-top: 15px;
+            float: left;
+        }
+
+        .editor-field {
+            width: 150px;
+            padding-top: 15px;
+            padding-left: 135px;
+        }
+
+        .smk-button {
+            padding-top: 15px;
+            width: 80px;
+        }
+    </style>
 </head>
 <body>
-    @using (Html.BeginForm()) {
+
+    @using (Html.BeginForm())
+    {
         @Html.ValidationSummary(true)
     
-        <fieldset>
-            <legend>Вход</legend>
-    
-            <div class="editor-label">
-                Введите почту:
+        <div>
+            Вход
+
+            <div>
+                <div class="editor-label">
+                    Введите почту:
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model=>model.Name)
-                @Html.ValidationMessageFor(model=>model.Name)
+            <div>
+                <div class="editor-label">
+                    Введите пароль:
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
             </div>
-    
-            <div class="editor-label">
-               Введите пароль:
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-    
-            <p>
+            <div class="smk-button">
                 <input type="submit" value="Войти" />
-            </p>
-        </fieldset>
+            </div>
+        </div>
     }
 </body>
 </html>

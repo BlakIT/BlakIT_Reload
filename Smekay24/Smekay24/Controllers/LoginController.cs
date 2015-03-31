@@ -19,9 +19,7 @@ namespace Smekay24.Controllers
         public ActionResult Login(UserData user)
         {
             SmekayEntities db = new SmekayEntities();
-
-            var users = db.Users.Where(x => x.Name.Equals(user.Name) && x.Password.Equals(user.Password));
-
+            var users = db.Users.Where(x => x.Name.Equals(user.Email) && x.Password.Equals(user.Password));
             if (users.Any())
             {
                 Session["CurrentUser"] = users.First();

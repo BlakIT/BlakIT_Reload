@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div>
+            <div class="col-xs-4">
+                <ul class="topUl">
+                    <li>
+                        <a>@Html.ActionLink("Главная", "Index", "Home", null, null)</a>
+                    </li>
+                    <li>
+                        <a>Мои обьявления</a>
+                    </li>
+                    <li>
+                        <a>Подать обьявления</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-4 col-xs-offset-4">
+                <ul class="topUl">
+                    <li>
+                        @{
+                            if (Session["CurrentUser"] == null)
+                            {
+                            <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
+                            }
+                            else
+                            {
+                            <a href="#">@( ((Smekay24.Users)Session["CurrentUser"]).Name)</a>
+                            }
+                            
+                        }
+                    </li>
+                    <li>
+                        <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
+                    </li>
+                    <li>
+                        <a>Правила</a>
+                    </li>
+                    <li>
+                        <a>Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <section id="main" style="margin:0 50%;">
+        @RenderBody()
+    </section>
+</body>
+</html>

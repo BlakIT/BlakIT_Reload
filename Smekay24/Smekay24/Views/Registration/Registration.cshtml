@@ -1,0 +1,81 @@
+﻿@model Smekay24.Models.RegistrationFormModel
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Layout.cshtml";
+}
+<h2>Registration</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+    
+        <div class="editor-blok">
+
+            <div>
+                Частное лицо @Html.RadioButtonFor(model => model.IsPrivatePerson, true);
+                 Предприятие @Html.RadioButtonFor(model => Model.IsPrivatePerson, false);
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите почту(ваш логин):
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите имя(название организации):
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите контактный телефон(ы):
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Phones)
+                    @Html.ValidationMessageFor(model => model.Phones)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите пароль:
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m=>m.City, ViewData["cities"] as List<SelectListItem>)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите пароль:
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Подтвердите пароль:
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.ConfirmPassword)
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+            <div>
+                Подписка на новости @Html.CheckBoxFor(model => model.IsNewsAssigned);
+                 Reminder @Html.CheckBoxFor(model => Model.IsNotitifcationAssigned);
+                 Исполбзовать напоминания @Html.CheckBoxFor(model => model.IsRemindersAssigned);
+            </div>
+            <div class="smk-button">
+                <input type="submit" value="Войти" />
+            </div>
+        </div>
+    }
+</body>
