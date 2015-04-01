@@ -3,79 +3,86 @@
     ViewBag.Title = "Registration";
     Layout = "~/Views/Layout.cshtml";
 }
-<h2>Registration</h2>
-<body>
+
+<style type="text/css">
+    #mainForm .row {
+        margin-top:20px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-4" style="padding-left:85px;">
+        <h1>smekay.center</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6 col-xs-offset-3" style="border: 1px solid #808080; padding-bottom: 30px;">
+
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
     
-        <div class="editor-blok">
+        <div class="row" id="mainForm">
+            <div class="col-xs-8 col-xs-offset-2"> 
 
-            <div>
-                Частное лицо @Html.RadioButtonFor(model => model.IsPrivatePerson, true);
-                 Предприятие @Html.RadioButtonFor(model => Model.IsPrivatePerson, false);
-            </div>
-            <div>
-                <div class="editor-label">
-                    Введите почту(ваш логин):
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Email)
-                    @Html.ValidationMessageFor(model => model.Email)
-                </div>
-            </div>
-            <div>
-                <div class="editor-label">
-                    Введите имя(название организации):
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Name)
-                    @Html.ValidationMessageFor(model => model.Name)
-                </div>
-            </div>
-            <div>
-                <div class="editor-label">
-                    Введите контактный телефон(ы):
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Phones)
-                    @Html.ValidationMessageFor(model => model.Phones)
-                </div>
-            </div>
-            <div>
-                <div class="editor-label">
-                    Введите пароль:
-                </div>
-                <div class="editor-field">
-                    @Html.DropDownListFor(m=>m.City, ViewData["cities"] as List<SelectListItem>)
-                </div>
-            </div>
-            <div>
-                <div class="editor-label">
-                    Введите пароль:
-                </div>
-                <div class="editor-field">
-                    @Html.PasswordFor(model => model.Password)
-                    @Html.ValidationMessageFor(model => model.Password)
-                </div>
-            </div>
-            <div>
-                <div class="editor-label">
-                    Подтвердите пароль:
-                </div>
-                <div class="editor-field">
-                    @Html.PasswordFor(model => model.ConfirmPassword)
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
-                </div>
-            </div>
-            <div>
-                Подписка на новости @Html.CheckBoxFor(model => model.IsNewsAssigned);
-                 Reminder @Html.CheckBoxFor(model => Model.IsNotitifcationAssigned);
-                 Исполбзовать напоминания @Html.CheckBoxFor(model => model.IsRemindersAssigned);
-            </div>
-            <div class="smk-button">
-                <input type="submit" value="Войти" />
-            </div>
+                    <div class="row">
+                        <div class="col-xs-6"> Частное лицо @Html.RadioButtonFor(model => model.IsPrivatePerson, true)</div>
+                        <div class="col-xs-6"> Предприятие @Html.RadioButtonFor(model => Model.IsPrivatePerson, false)</div>
+                    </div>
+                    <div class="row">  
+                        <div class="col-xs-12">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Введите почту(ваш логин)" } )
+                                @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Введите имя(название организации)" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.TextBoxFor(model => model.Phones, new { @class = "form-control", @placeholder = "Введите контактный телефон(ы)" })
+                            @Html.ValidationMessageFor(model => model.Phones)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Введите пароль" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Подтвердите пароль" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                        </div>
+                    </div>
+                    <div  class="row">
+                        <div class="col-xs-12">
+                             <div  class="row">Подписка на новости @Html.CheckBoxFor(model => model.IsNewsAssigned)</div>
+                             <div  class="row">Напоминания @Html.CheckBoxFor(model => Model.IsNotitifcationAssigned)</div>
+                             <div  class="row">Исполбзовать напоминания @Html.CheckBoxFor(model => model.IsRemindersAssigned)</div>
+                        </div>
+                    </div>
+
+                    <div  class="row">
+                        <div class="col-xs-12">
+                                <input type="submit" class="btn btn-block" value="Зарегестрироваться" />
+                        </div>
+                    </div>
+
+
+             </div>
         </div>
     }
-</body>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-4" style="padding-left:85px;">
+        <p>Уже зарегестрированы? <a href="#">Войти</a></p>
+    </div>
+</div>

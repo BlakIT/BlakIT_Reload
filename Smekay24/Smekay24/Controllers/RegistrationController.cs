@@ -10,12 +10,14 @@ namespace Smekay24.Controllers
     public class RegistrationController : Controller
     {
         private SmekayEntities db = new SmekayEntities();
+
         [HttpGet]
         public ActionResult Registration()
         {
             ViewData["cities"] = db.City.Select(x => new SelectListItem() { Text = x.Name, Value = x.CCode.ToString() }).ToList();
             return View();
         }
+
         [HttpPost]
         public ActionResult Registration(RegistrationFormModel form)
         {
