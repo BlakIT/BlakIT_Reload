@@ -3,17 +3,31 @@
     ViewBag.Title = "Registration";
     Layout = "~/Views/Layout.cshtml";
 }
-<h2>Registration</h2>
+@using BotDetect.Web.UI.Mvc;
+<h2 style="text-align: center">Регистрация</h2>
+
+<style>
+    .editor-field > input {
+        width: 240px;
+    }
+
+    .smk-button > input {
+        width: 250px;
+    }
+</style>
 <body>
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
     
-        <div class="editor-blok">
-
+        <div style="width: 500px; margin: 0 auto;">
             <div>
-                Частное лицо @Html.RadioButtonFor(model => model.IsPrivatePerson, true);
-                 Предприятие @Html.RadioButtonFor(model => Model.IsPrivatePerson, false);
+                <div style="float: left">
+                    Частное лицо @Html.RadioButtonFor(model => model.IsPrivatePerson, true)
+                </div>
+                <div style="text-align: right;">
+                    Предприятие @Html.RadioButtonFor(model => Model.IsPrivatePerson, false)
+                </div>
             </div>
             <div>
                 <div class="editor-label">
@@ -44,10 +58,10 @@
             </div>
             <div>
                 <div class="editor-label">
-                    Введите пароль:
+                    Выберите город:
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(m=>m.City, ViewData["cities"] as List<SelectListItem>)
+                    @Html.DropDownListFor(m => m.City, ViewData["cities"] as List<SelectListItem>)
                 </div>
             </div>
             <div>
@@ -69,12 +83,35 @@
                 </div>
             </div>
             <div>
-                Подписка на новости @Html.CheckBoxFor(model => model.IsNewsAssigned);
-                 Reminder @Html.CheckBoxFor(model => Model.IsNotitifcationAssigned);
-                 Исполбзовать напоминания @Html.CheckBoxFor(model => model.IsRemindersAssigned);
+                @Html.CheckBoxFor(model => Model.IsUserAgree)
+                Я подтверждаю свое согласие с условиями пользовательского соглашения         
             </div>
-            <div class="smk-button">
-                <input type="submit" value="Войти" />
+            <div>
+                @Html.CheckBoxFor(model => Model.IsNotitifcationAssigned)
+                Я хочу получать уведомления 
+            </div>
+            <div style="padding-left: 135px; padding-top: 20px;">
+                <div>
+                    @{ MvcCaptcha sampleCaptcha = new MvcCaptcha("SampleCaptcha");
+                       sampleCaptcha.UserInputClientID = "CaptchaCode"; }
+                    @Html.Captcha(sampleCaptcha)
+                </div>
+                <div class="actions" style="margin: -6px 35px;">
+                    <div>
+                        @Html.Label("CaptchaCode", "Введите надпись с рисунка:")
+                    </div>
+                    <div>
+                        @Html.TextBox("CaptchaCode")
+                        @Html.ValidationMessage("CaptchaCode")
+                        @if ((Request.HttpMethod == "POST") && ViewData.ModelState.IsValid)
+                        {
+                            <span class="correct">Correct!</span>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="smk-button" style="margin: 25px 135px">
+                <input type="submit" value="Зарегистрироваться" />
             </div>
         </div>
     }

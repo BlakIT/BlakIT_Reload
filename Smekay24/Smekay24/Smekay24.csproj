@@ -41,6 +41,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BotDetect">
+      <HintPath>..\packages\Captcha.3.0.16.0\lib\net45\BotDetect.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect.Web.UI.Mvc">
+      <HintPath>..\packages\Captcha.3.0.16.0\lib\net45\BotDetect.Web.UI.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -142,7 +148,9 @@
     <Compile Include="Images_To_Advert.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
-<Compile Include="Models\CategoryCover.cs" /><Compile Include="Models\RegistrationFormModel.cs" />    <Compile Include="Notification.cs">
+    <Compile Include="Models\CategoryCover.cs" />
+    <Compile Include="Models\RegistrationFormModel.cs" />
+    <Compile Include="Notification.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

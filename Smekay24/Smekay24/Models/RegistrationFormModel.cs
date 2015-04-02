@@ -16,8 +16,8 @@ namespace Smekay24.Models
         public string ConfirmPassword { get; set; }
         public bool IsPrivatePerson { get; set; }
         public string City { get; set; }
-        public bool IsNewsAssigned { get; set; }
-        public bool IsRemindersAssigned { get; set; }
         public bool IsNotitifcationAssigned { get; set; }
+        public string Captcha { get; set; }
+        public bool IsUserAgree { get; set; }
     }
 }
