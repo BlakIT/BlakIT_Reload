@@ -11,6 +11,7 @@ namespace Smekay24.Controllers
     public class RegistrationController : Controller
     {
         private SmekayEntities db = new SmekayEntities();
+
         [HttpGet]
         public ActionResult Registration()
         {
@@ -18,6 +19,7 @@ namespace Smekay24.Controllers
             ViewData["cities"] = db.City.Select(x => new SelectListItem() { Text = x.Name, Value = x.CCode.ToString() }).ToList();
             return View();
         }
+
         [HttpPost]
         [CaptchaValidation("CaptchaCode", "SampleCaptcha", "Неверно")]
         public ActionResult Registration(RegistrationFormModel form)
