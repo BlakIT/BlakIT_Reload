@@ -28,6 +28,7 @@ namespace Smekay24
         public Nullable<int> News { get; set; }
         public Nullable<int> Reminders { get; set; }
         public Nullable<int> Notifications { get; set; }
+        public string Contacts { get; set; }
     
         public virtual City City { get; set; }
         public virtual ICollection<Notification> Notification { get; set; }

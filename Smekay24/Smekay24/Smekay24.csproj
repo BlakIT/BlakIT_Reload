@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PersonalCabinetController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Countries.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
@@ -149,6 +150,7 @@
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryCover.cs" />
+    <Compile Include="Models\PCSettingsModel.cs" />
     <Compile Include="Models\RegistrationFormModel.cs" />
     <Compile Include="Notification.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
@@ -250,6 +252,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Registration\Registration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PersonalCabinet\PCabLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PersonalCabinet\PersonalCabinetAdverts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PersonalCabinet\PersonalCabinetSettings.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -22,12 +22,18 @@ namespace Smekay24.Controllers
             var users = db.Users.Where(x => x.Name.Equals(user.Email) && x.Password.Equals(user.Password));
             if (users.Any())
             {
-                Session["CurrentUser"] = users.First();
-                return RedirectToAction("Index", "Home");
+                UserSession.CurrentUser = users.First();
+                return RedirectToAction("PersonalCabinetAdverts", "PersonalCabinet");
             }
             else
                 return View();
         }
 
+        public ActionResult Logout()
+        {
+            UserSession.CurrentUser = null;
+            UserSession.IsUserLogged = false;
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

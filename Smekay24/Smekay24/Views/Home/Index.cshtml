@@ -58,19 +58,27 @@
                 <ul class="topUl">
                     <li>
                         @{
-                            if (Session["CurrentUser"] == null)
+                            if (!@Smekay24.WebAPI.UserSession.IsUserLogged)
                             {
-                                <a>@Html.ActionLink("Вход","Login","Login",null,null)</a>
+                            <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
                             }
                             else
                             {
-                                <a href="#">@( ((Smekay24.Users)Session["CurrentUser"]).Name )</a>
+                            <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Name, "PersonalCabinet", "PersonalCabinet", null, null)</a>
                             }
-                            
                         }
                     </li>
                     <li>
-                        <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
+                        @{
+                            if (@Smekay24.WebAPI.UserSession.IsUserLogged)
+                            {
+                            <a>@Html.ActionLink("Выход", "Logout","Login",null,null)</a>
+                            }
+                            else
+                            {
+                            <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
+                            }                           
+                        }
                     </li>
                     <li>
                         <a>Правила</a>

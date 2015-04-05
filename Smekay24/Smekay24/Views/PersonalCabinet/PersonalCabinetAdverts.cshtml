@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "PersonalCabinet";
+    Layout = "~/Views/PersonalCabinet/PCabLayout.cshtml";
+}
+<div style="padding-left: 260px;">
+    @{
+        foreach (Smekay24.Advert adv in (List<Smekay24.Advert>)ViewData["adverts"])
+        {
+        <div class="row" style="border-bottom: 1px solid silver;">
+            <div class="col-xs-5">
+                <img src="~/images/mob.jpg" style="width: 20%;" />
+            </div>
+
+            <div class="col-xs-5">
+                <p>@adv.Title</p>
+                @adv.Price
+                <p>@adv.Date</p>
+                <p>@adv.Description</p>
+            </div>
+        </div> 
+        }
+    }
+</div>

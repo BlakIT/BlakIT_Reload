@@ -124,6 +124,7 @@
           <Property Name="Reminders" Type="int" />
           <Property Name="Notifications" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Contacts" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <Association Name="Advert_fk2">
           <End Role="Advert_Category" Type="Хранилище SmekayModel.Advert_Category" Multiplicity="0..1" />
@@ -332,6 +333,7 @@
           <Property Name="Notifications" Type="Int32" />
           <NavigationProperty Name="City" Relationship="SmekayModel.Users_fk0" FromRole="Users" ToRole="City" />
           <NavigationProperty Name="Notification" Relationship="SmekayModel.Notification_fk1" FromRole="Users" ToRole="Notification" />
+          <Property Type="String" Name="Contacts" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="Advert_fk2">
           <End Role="Advert_Category" Type="SmekayModel.Advert_Category" Multiplicity="0..1" />
@@ -493,6 +495,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SmekayModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="UCode" ColumnName="UCode" />
                 <ScalarProperty Name="CCode" ColumnName="CCode" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
