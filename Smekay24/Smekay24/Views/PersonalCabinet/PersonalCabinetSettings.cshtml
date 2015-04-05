@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "PersonalCabinetSettings";
+    Layout = "~/Views/PersonalCabinet/PCabLayout.cshtml";
+    Smekay24.Users user = ViewData["user"] as Smekay24.Users;    
+}
+
+@model Smekay24.Models.PCSettingsModel
+
+<div style="padding-left: 260px;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+    
+        @Smekay24.WebAPI.UserSession.CurrentUser.Name
+        <div>
+
+            <h3>Контактная информация</h3>
+
+            <div class="editor-label">
+                Введите имя(название организации):
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+            <div class="editor-label">
+                Контактное лицо:
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Contact)
+                @Html.ValidationMessageFor(model => model.Contact)
+            </div>
+
+
+            <div class="editor-label">
+                Введите контактный телефон(ы):
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Phones)
+                @Html.ValidationMessageFor(model => model.Phones)
+            </div>
+
+            <div class="editor-label">
+                Выберите город:
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(m => m.City, ViewData["cities"] as List<SelectListItem>)
+            </div>
+        </div>
+
+        <div>
+
+            <h3>Подписка</h3>
+            <div>
+                @Html.CheckBoxFor(model => Model.News)
+                Новости сайта 
+            </div>
+
+            <div>
+                @Html.CheckBoxFor(model => Model.Notifications)
+                Получать уведомления 
+            </div>
+
+            <div>
+                @Html.CheckBoxFor(model => Model.Reminders)
+                Получать напоминания 
+            </div>
+        </div>
+        
+        <div>
+            <h3>Смена пароля</h3>
+            <div class="editor-label">
+                Введите текущий пароль:
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.CurrentPassword)
+                @Html.ValidationMessageFor(model => model.CurrentPassword)
+            </div>
+            <div class="editor-label">
+                Новый пароль:
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.NewPassword)
+                @Html.ValidationMessageFor(model => model.NewPassword)
+            </div>
+            <div class="editor-label">
+                Подтвердите пароль:
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.ConfirmNewPass)
+                @Html.ValidationMessageFor(model => model.ConfirmNewPass)
+            </div>
+        </div>
+  
+        <div class="smk-button">
+            <input type="submit" value="Сохранить" />
+        </div>
+        <div>
+            <h3>Контактная информация</h3>
+            Вы желаете удалить учетную запись и все объявления?
+            <div class="smk-button">
+                @Html.ActionLink("Удалить", "PersonalCabinetDelete", "PersonalCabinet", null, null)
+            </div>
+        </div>
+    }
+</div>

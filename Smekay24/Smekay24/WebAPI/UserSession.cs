@@ -17,8 +17,32 @@ namespace Smekay24.WebAPI
             Password = "default";
         }
     }
-    public class UserSession
+    public static class UserSession
     {
+        public static Users CurrentUser
+        {
+            get 
+            { 
+                return (Users)HttpContext.Current.Session["CurrentUser"]; 
+            }
+            set 
+            {
+                HttpContext.Current.Session["CurrentUser"] = value;
+                HttpContext.Current.Session["IsUserLogged"] = true;
+            }
+        }
 
+        public static bool IsUserLogged
+        {
+            get 
+            { 
+                return (bool)(HttpContext.Current.Session["IsUserLogged"]?? false);
+            }
+
+            set 
+            { 
+                HttpContext.Current.Session["IsUserLogged"] = value;
+            }
+        }
     }
 }

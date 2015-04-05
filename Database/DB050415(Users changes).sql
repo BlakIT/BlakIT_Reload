@@ -1,0 +1,1 @@
+ALTER TABLE Users ADD Contacts nvarchar(200);

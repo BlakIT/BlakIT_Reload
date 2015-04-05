@@ -5,9 +5,8 @@
     <title>@ViewBag.Title</title>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/Site.css" rel="stylesheet" />
-        <style>
+    <style>
         .editor-blok {
-
         }
 
         .editor-label {
@@ -20,7 +19,6 @@
             padding-top: 15px;
             padding-left: 260px;
         }
-
     </style>
 </head>
 <body>
@@ -43,19 +41,27 @@
                 <ul class="topUl">
                     <li>
                         @{
-                            if (Session["CurrentUser"] == null)
+                            if (!@Smekay24.WebAPI.UserSession.IsUserLogged)
                             {
                             <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
                             }
                             else
                             {
-                            <a href="#">@( ((Smekay24.Users)Session["CurrentUser"]).Name)</a>
-                            }
-                            
+                            <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Name, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
+                            }                           
                         }
                     </li>
-                    <li>
-                        <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
+                    <li>                      
+                          @{
+                            if (@Smekay24.WebAPI.UserSession.IsUserLogged)
+                            {
+                            <a>@Html.ActionLink("Выход", "Logout","Login",null,null)</a>
+                            }
+                            else
+                            {
+                            <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
+                            }                           
+                        }
                     </li>
                     <li>
                         <a>Правила</a>
@@ -67,7 +73,7 @@
             </div>
         </div>
     </div>
-    <section id="main" >
+    <section id="main">
         @RenderBody()
     </section>
 </body>
