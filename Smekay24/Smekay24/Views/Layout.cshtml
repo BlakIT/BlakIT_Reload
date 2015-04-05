@@ -5,6 +5,23 @@
     <title>@ViewBag.Title</title>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/Site.css" rel="stylesheet" />
+        <style>
+        .editor-blok {
+
+        }
+
+        .editor-label {
+            padding-top: 15px;
+            float: left;
+        }
+
+        .editor-field {
+            width: 150px;
+            padding-top: 15px;
+            padding-left: 260px;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -50,7 +67,7 @@
             </div>
         </div>
     </div>
-    <section id="main">
+    <section id="main" >
         @RenderBody()
     </section>
 </body>

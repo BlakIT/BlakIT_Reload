@@ -3,86 +3,116 @@
     ViewBag.Title = "Registration";
     Layout = "~/Views/Layout.cshtml";
 }
+@using BotDetect.Web.UI.Mvc;
+<h2 style="text-align: center">Регистрация</h2>
 
-<style type="text/css">
-    #mainForm .row {
-        margin-top:20px;
+<style>
+    .editor-field > input {
+        width: 240px;
+    }
+
+    .smk-button > input {
+        width: 250px;
     }
 </style>
-
-<div class="row">
-    <div class="col-xs-4 col-xs-offset-4" style="padding-left:85px;">
-        <h1>smekay.center</h1>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-6 col-xs-offset-3" style="border: 1px solid #808080; padding-bottom: 30px;">
-
+<body>
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
     
-        <div class="row" id="mainForm">
-            <div class="col-xs-8 col-xs-offset-2"> 
-
-                    <div class="row">
-                        <div class="col-xs-6"> Частное лицо @Html.RadioButtonFor(model => model.IsPrivatePerson, true)</div>
-                        <div class="col-xs-6"> Предприятие @Html.RadioButtonFor(model => Model.IsPrivatePerson, false)</div>
+        <div style="width: 500px; margin: 0 auto;">
+            <div>
+                <div style="float: left">
+                    Частное лицо @Html.RadioButtonFor(model => model.IsPrivatePerson, true)
+                </div>
+                <div style="text-align: right;">
+                    Предприятие @Html.RadioButtonFor(model => Model.IsPrivatePerson, false)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите почту(ваш логин):
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите имя(название организации):
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите контактный телефон(ы):
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Phones)
+                    @Html.ValidationMessageFor(model => model.Phones)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Выберите город:
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.City, ViewData["cities"] as List<SelectListItem>)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Введите пароль:
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+            <div>
+                <div class="editor-label">
+                    Подтвердите пароль:
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.ConfirmPassword)
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+            <div>
+                @Html.CheckBoxFor(model => Model.IsUserAgree)
+                Я подтверждаю свое согласие с условиями пользовательского соглашения         
+            </div>
+            <div>
+                @Html.CheckBoxFor(model => Model.IsNotitifcationAssigned)
+                Я хочу получать уведомления 
+            </div>
+            <div style="padding-left: 135px; padding-top: 20px;">
+                <div>
+                    @{ MvcCaptcha sampleCaptcha = new MvcCaptcha("SampleCaptcha");
+                       sampleCaptcha.UserInputClientID = "CaptchaCode"; }
+                    @Html.Captcha(sampleCaptcha)
+                </div>
+                <div class="actions" style="margin: -6px 35px;">
+                    <div>
+                        @Html.Label("CaptchaCode", "Введите надпись с рисунка:")
                     </div>
-                    <div class="row">  
-                        <div class="col-xs-12">
-                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Введите почту(ваш логин)" } )
-                                @Html.ValidationMessageFor(model => model.Email)
-                        </div>
+                    <div>
+                        @Html.TextBox("CaptchaCode")
+                        @Html.ValidationMessage("CaptchaCode")
+                        @if ((Request.HttpMethod == "POST") && ViewData.ModelState.IsValid)
+                        {
+                            <span class="correct">Correct!</span>
+                        }
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Введите имя(название организации)" })
-                            @Html.ValidationMessageFor(model => model.Name)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            @Html.TextBoxFor(model => model.Phones, new { @class = "form-control", @placeholder = "Введите контактный телефон(ы)" })
-                            @Html.ValidationMessageFor(model => model.Phones)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Введите пароль" })
-                            @Html.ValidationMessageFor(model => model.Password)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Подтвердите пароль" })
-                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
-                        </div>
-                    </div>
-                    <div  class="row">
-                        <div class="col-xs-12">
-                             <div  class="row">Подписка на новости @Html.CheckBoxFor(model => model.IsNewsAssigned)</div>
-                             <div  class="row">Напоминания @Html.CheckBoxFor(model => Model.IsNotitifcationAssigned)</div>
-                             <div  class="row">Исполбзовать напоминания @Html.CheckBoxFor(model => model.IsRemindersAssigned)</div>
-                        </div>
-                    </div>
-
-                    <div  class="row">
-                        <div class="col-xs-12">
-                                <input type="submit" class="btn btn-block" value="Зарегестрироваться" />
-                        </div>
-                    </div>
-
-
-             </div>
+                </div>
+            </div>
+            <div class="smk-button" style="margin: 25px 135px">
+                <input type="submit" value="Зарегистрироваться" />
+            </div>
         </div>
     }
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-4 col-xs-offset-4" style="padding-left:85px;">
-        <p>Уже зарегестрированы? <a href="#">Войти</a></p>
-    </div>
-</div>
+</body>

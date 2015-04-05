@@ -1,4 +1,5 @@
-﻿using Smekay24.Models;
+﻿using BotDetect.Web.UI.Mvc;
+using Smekay24.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,32 +15,30 @@ namespace Smekay24.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
+            MvcCaptcha.ResetCaptcha("SampleCaptcha");
             ViewData["cities"] = db.City.Select(x => new SelectListItem() { Text = x.Name, Value = x.CCode.ToString() }).ToList();
             return View();
         }
 
         [HttpPost]
+        [CaptchaValidation("CaptchaCode", "SampleCaptcha", "Неверно")]
         public ActionResult Registration(RegistrationFormModel form)
-        {
-            if (form.Password == form.ConfirmPassword)
-            {
-                if (!db.Users.Any(x => x.Email == form.Email))
+        {            
+            if (MvcCaptcha.IsCaptchaSolved("SampleCaptcha") && form.IsUserAgree &&
+                form.Password == form.ConfirmPassword && !db.Users.Any(x => x.Email == form.Email))
+            {              
+                var user = new Users()
                 {
-                    var user = new Users()
-                    {
-                        Name = form.Name,
-                        Phone = form.Phones,
-                        Email = form.Email,
-                        Reminders = Convert.ToInt32(form.IsRemindersAssigned),
-                        Notifications = Convert.ToInt32(form.IsNotitifcationAssigned),
-                        News = Convert.ToInt32(form.IsNewsAssigned),
-                        Password = form.Password,
-                        CCode = Int32.Parse(form.City)
-                    };
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    Session["CurrentUser"] = user;
-                }
+                    Name = form.Name,
+                    Phone = form.Phones,
+                    Email = form.Email,
+                    Notifications = Convert.ToInt32(form.IsNotitifcationAssigned),
+                    Password = form.Password,
+                    CCode = Int32.Parse(form.City)
+                };
+                db.Users.Add(user);
+                db.SaveChanges();
+                Session["CurrentUser"] = user;
                 return RedirectToAction("Index", "Home");
             }
             else
