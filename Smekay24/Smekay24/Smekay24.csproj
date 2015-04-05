@@ -130,6 +130,7 @@
     <Compile Include="City.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdvertController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PersonalCabinetController.cs" />
@@ -253,7 +254,7 @@
   <ItemGroup>
     <Content Include="Views\Registration\Registration.cshtml" />
   </ItemGroup>
-  <ItemGroup>
+<ItemGroup>
     <Content Include="Views\PersonalCabinet\PCabLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -261,8 +262,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\PersonalCabinet\PersonalCabinetSettings.cshtml" />
-  </ItemGroup>
-  <PropertyGroup>
+  </ItemGroup><ItemGroup>
+    <Content Include="Views\Advert\AddAdvert.cshtml" />
+  </ItemGroup>  <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
