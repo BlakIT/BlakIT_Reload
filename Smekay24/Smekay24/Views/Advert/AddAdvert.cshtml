@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Smekay24.Advert
+@{
     Layout = null;
 }
 
@@ -8,14 +9,28 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>AddAdvert</title>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Site.css" rel="stylesheet" />
+
+
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        #addForm .row {
+            margin-top:10px;
+        }
+    </style>
+    
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid">       
+
         <div class="row">
                 <div class="col-xs-4" >
                 <ul class="topUl">
                     <li>
-                        <a>Главная</a>
+                        <a href="@Url.Action("Index","Home")">Главная</a>
                     </li>
                     <li>
                         <a>Мои обьявления</a>
@@ -39,6 +54,138 @@
                 </ul>
             </div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-5">
+                <h2>Подать объявление</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <h5>Все объявление перед добавлением проверяются на соответсвие <a>правилам</a></h5>
+            </div>
+        </div>
+    
+        <div class="row">
+
+            <div class="col-xs-8 col-xs-offset-2">
+
+                 @using (Html.BeginForm("AddAdvert", "Advert", FormMethod.Post, new { @id = "addForm", enctype = "multipart/form-data" }))
+                 {
+                     @Html.ValidationSummary(true)
+
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Название объявления</h4>
+                         </div>
+                         <div class="col-xs-6">
+                             @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Контактное лицо</h4>
+                         </div>
+                         <div class="col-xs-6">
+                             @Html.TextBoxFor(model => model.Contact, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Город</h4>
+                         </div>
+                         <div class="col-xs-6">
+                             @Html.DropDownListFor(m => m.CCode, ViewData["cities"] as List<SelectListItem>, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Телефоны</h4>
+                         </div>
+                         <div class="col-xs-6">
+                             @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Электронная почта</h4>
+                         </div>
+                         <div class="col-xs-6">
+                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Категория</h4>
+                         </div>
+                         <div class="col-xs-6">
+                             @Html.DropDownListFor(model => model.ACCode, ViewData["category"] as List<SelectListItem>, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Описание</h4>
+                         </div>
+                         <div class="col-xs-6">
+                             @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>История товара</h4>
+                         </div>
+                         <div class="col-xs-6">
+                              @Html.TextAreaFor(model => model.History, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Цена</h4>
+                         </div>
+                         <div class="col-xs-3">
+                              @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-4">
+                             <h4>Фотографии</h4>
+                             <p>Не более 5 фото</p>
+                         </div>
+                         <div class="col-xs-3">
+                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
+                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
+                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
+                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
+                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
+                         </div>
+                     </div>
+                     
+                     <div class="row">
+                         <div class="col-xs-5">                             
+                              <button type="button" class="btn btn-info btn-block" id="viewNow">Предварительный просмотр</button>
+                         </div>
+                         <div class="col-xs-5">                             
+                              <button type="submit" class="btn btn-info btn-block" id="submitForm" name="submitForm">Добавить объявление</button>
+                         </div>
+                     </div>
+                     
+                     
+                 }
+
+            </div>      
+
+        </div>
+
+    </div>  
+
 </body>
 </html>

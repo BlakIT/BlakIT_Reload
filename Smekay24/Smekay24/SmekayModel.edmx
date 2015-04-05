@@ -44,7 +44,7 @@
           <Key>
             <PropertyRef Name="ACode" />
           </Key>
-          <Property Name="ACode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ACode" Type="int" Nullable="false" />
           <Property Name="UCode" Type="int" />
           <Property Name="Status" Type="int" />
           <Property Name="CCode" Type="int" />
@@ -115,14 +115,14 @@
           <Key>
             <PropertyRef Name="UCode" />
           </Key>
-          <Property Name="UCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UCode" Type="int" Nullable="false" />
           <Property Name="CCode" Type="int" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Phone" Type="text" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="News" Type="int" />
           <Property Name="Reminders" Type="int" />
           <Property Name="Notifications" Type="int" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="Advert_fk2">
