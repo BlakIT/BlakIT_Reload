@@ -31,10 +31,6 @@
             <End Role="Advert" EntitySet="Advert" />
             <End Role="Images_To_Advert" EntitySet="Images_To_Advert" />
           </AssociationSet>
-          <AssociationSet Name="Notification_fk1" Association="Хранилище SmekayModel.Notification_fk1">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Notification" EntitySet="Notification" />
-          </AssociationSet>
           <AssociationSet Name="Users_fk0" Association="Хранилище SmekayModel.Users_fk0">
             <End Role="City" EntitySet="City" />
             <End Role="Users" EntitySet="Users" />
@@ -44,7 +40,7 @@
           <Key>
             <PropertyRef Name="ACode" />
           </Key>
-          <Property Name="ACode" Type="int" Nullable="false" />
+          <Property Name="ACode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UCode" Type="int" />
           <Property Name="Status" Type="int" />
           <Property Name="CCode" Type="int" />
@@ -62,7 +58,7 @@
           <Key>
             <PropertyRef Name="ACCode" />
           </Key>
-          <Property Name="ACCode" Type="int" Nullable="false" />
+          <Property Name="ACCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="text" />
           <Property Name="Desc" Type="text" />
         </EntityType>
@@ -70,7 +66,7 @@
           <Key>
             <PropertyRef Name="CCode" />
           </Key>
-          <Property Name="CCode" Type="int" Nullable="false" />
+          <Property Name="CCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="text" />
           <Property Name="CoCode" Type="int" />
         </EntityType>
@@ -78,7 +74,7 @@
           <Key>
             <PropertyRef Name="CoCode" />
           </Key>
-          <Property Name="CoCode" Type="int" Nullable="false" />
+          <Property Name="CoCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Country" Type="text" />
         </EntityType>
         <EntityType Name="Favorites">
@@ -106,7 +102,7 @@
           <Key>
             <PropertyRef Name="NCode" />
           </Key>
-          <Property Name="NCode" Type="int" Nullable="false" />
+          <Property Name="NCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AuthorCode" Type="int" />
           <Property Name="RecipientCode" Type="int" />
           <Property Name="Content" Type="text" />
@@ -115,7 +111,7 @@
           <Key>
             <PropertyRef Name="UCode" />
           </Key>
-          <Property Name="UCode" Type="int" Nullable="false" />
+          <Property Name="UCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CCode" Type="int" />
           <Property Name="Phone" Type="text" />
           <Property Name="News" Type="int" />
@@ -171,18 +167,6 @@
             </Principal>
             <Dependent Role="Images_To_Advert">
               <PropertyRef Name="ACode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Notification_fk1">
-          <End Role="Users" Type="Хранилище SmekayModel.Users" Multiplicity="0..1" />
-          <End Role="Notification" Type="Хранилище SmekayModel.Notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UCode" />
-            </Principal>
-            <Dependent Role="Notification">
-              <PropertyRef Name="RecipientCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
