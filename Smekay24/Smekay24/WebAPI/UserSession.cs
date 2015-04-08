@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Smekay24.WebAPI
 {
+            
     public class UserData
     {
         public string Email { get; set; }
@@ -17,8 +18,11 @@ namespace Smekay24.WebAPI
             Password = "default";
         }
     }
+
     public static class UserSession
     {
+        private static SmekayEntities db = new SmekayEntities();
+
         public static Users CurrentUser
         {
             get 
@@ -43,6 +47,12 @@ namespace Smekay24.WebAPI
             { 
                 HttpContext.Current.Session["IsUserLogged"] = value;
             }
+        }
+
+        public static Users CheckPassword(string userEmail, string password, int? userCode = null)
+        {
+            var users = db.Users.Where(x => x.Email.Equals(userEmail) && x.Password.Equals(password));
+            return users.Any() ? users.First() : null;
         }
     }
 }

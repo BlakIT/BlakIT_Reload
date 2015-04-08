@@ -6,12 +6,30 @@
 
 @model Smekay24.Models.PCSettingsModel
 
+<style>
+    .disabledLink {
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    checkBoxClick = function () {
+        if ($('confirmChk').attr('checked'))
+            $('deleteLinkID').removeClass();
+        else
+            if (!$('deleteLinkID').hasClass('disabledLink'))
+            {
+                $('deleteLinkID').addClass('disabledLink')
+            }
+       
+    };
+</script>
 <div style="padding-left: 260px;">
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
     
-        @Smekay24.WebAPI.UserSession.CurrentUser.Name
+        @Smekay24.WebAPI.UserSession.CurrentUser.Email
         <div>
 
             <h3>Контактная информация</h3>
@@ -99,8 +117,12 @@
         <div>
             <h3>Контактная информация</h3>
             Вы желаете удалить учетную запись и все объявления?
-            <div class="smk-button">
-                @Html.ActionLink("Удалить", "PersonalCabinetDelete", "PersonalCabinet", null, null)
+            <div>
+                @Html.CheckBox("deleteCheckBox", false, new {@id="confirmChk", @onchange="checkBoxClick()"})
+                Подтверждаю удаление
+            </div>
+            <div>
+                @Html.ActionLink("Удалить", "PersonalCabinetDelete", "PersonalCabinet", null, new {@id="deleteLinkID", @disabled = "true", @class = "disabledLink" })
             </div>
         </div>
     }

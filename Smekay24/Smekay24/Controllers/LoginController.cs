@@ -19,10 +19,10 @@ namespace Smekay24.Controllers
         public ActionResult Login(UserData user)
         {
             SmekayEntities db = new SmekayEntities();
-            var users = db.Users.Where(x => x.Name.Equals(user.Email) && x.Password.Equals(user.Password));
-            if (users.Any())
+            var users = UserSession.CheckPassword(user.Email, user.Password);
+            if (users!=null)
             {
-                UserSession.CurrentUser = users.First();
+                UserSession.CurrentUser = users;
                 return RedirectToAction("PersonalCabinetAdverts", "PersonalCabinet");
             }
             else

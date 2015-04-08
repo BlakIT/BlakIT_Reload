@@ -49,6 +49,10 @@ namespace Smekay24.Controllers
             user.News = form.News ? 1 : 0;
             user.Notifications = form.Notifications ? 1 : 0;
             user.Reminders = form.Reminders ? 1 : 0;
+            if (UserSession.CheckPassword(user.Email, form.CurrentPassword)!=null && form.NewPassword.Equals(form.ConfirmNewPass))
+            {
+                user.Password = form.NewPassword;
+            }
             db.SaveChanges();
             ViewData["cities"] = db.City.Select(x => new SelectListItem() { Text = x.Name, Value = x.CCode.ToString() }).ToList();
             return View(form);
