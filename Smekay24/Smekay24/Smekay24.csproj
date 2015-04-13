@@ -254,7 +254,7 @@
   <ItemGroup>
     <Content Include="Views\Registration\Registration.cshtml" />
   </ItemGroup>
-<ItemGroup>
+  <ItemGroup>
     <Content Include="Views\PersonalCabinet\PCabLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -262,9 +262,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\PersonalCabinet\PersonalCabinetSettings.cshtml" />
-  </ItemGroup><ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Advert\AddAdvert.cshtml" />
-  </ItemGroup>  <PropertyGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Advert\GetAdvertsFromCategory.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>

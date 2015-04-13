@@ -9,8 +9,6 @@ namespace Smekay24.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
 
         private SmekayEntities db = new SmekayEntities();
 
