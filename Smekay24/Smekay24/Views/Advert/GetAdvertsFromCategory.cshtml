@@ -1,0 +1,142 @@
+﻿<script type="text/javascript">
+    function getCatAdverts(catrext) {
+        window.location.href = '/Advert/GetAdvertsFromCategory?catText=' + catrext;//  GetAdvertsFromCategory           
+    }
+
+    function getAdvertsByFirstLetter(letter) {
+        window.location.href = '/Advert/GetAdvertsByLetter?letter=' + letter;
+    }
+
+</script>
+
+<style type="text/css">
+    #mainDiv .row {
+        margin-bottom: 30px;
+    }
+</style>
+
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/Site.css" rel="stylesheet" />
+
+
+<script src="~/js/bootstrap.min.js"></script>
+<div class="container-fluid" id="mainDiv">
+
+    <div class="row">
+        <div class="col-xs-4">
+            <ul class="topUl">
+                <li>
+                    <a>Главная</a>
+                </li>
+                <li>
+                    <a>Мои обьявления</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("AddAdvert", "Advert")">Подать обьявления</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-4 col-xs-offset-4">
+            <ul class="topUl">
+                <li>
+                    @{
+                        if (!@Smekay24.WebAPI.UserSession.IsUserLogged)
+                        {
+                        <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
+                        }
+                        else
+                        {
+                        <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Email, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
+                        }
+                    }
+                </li>
+                <li>
+                    @{
+                        if (@Smekay24.WebAPI.UserSession.IsUserLogged)
+                        {
+                        <a>@Html.ActionLink("Выход", "Logout", "Login", null, null)</a>
+                        }
+                        else
+                        {
+                        <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
+                        }                           
+                    }
+                </li>
+                <li>
+                    <a>Правила</a>
+                </li>
+                <li>
+                    <a>Контакты</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-5">
+            <h1>Смекай24.РФ</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Список категорий -->
+        <div class="col-xs-11 col-xs-offset-1">
+            @{
+                foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
+                {
+                <a href="#" style="border-right:1px solid black; margin-left:10px; padding-right:10px;" onclick="getCatAdverts('@cat.Text')"  >@cat.Text </a>                     
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 10px;">
+        <!-- Поиск -->
+        <div class="col-xs-8 col-xs-offset-2">
+            <b>Поиск</b>
+            <input style="width: 40%;" type="text" name="search" id="search" />
+            <b style="margin-left: 40px; margin-right: 40px;">в</b>
+            @Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>)
+            <input style="margin-left: 40px;" type="submit" name="searBut" id="searchBut" value="Поиск" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-9 col-xs-offset-3">
+            @{
+                foreach (string s in ViewData["alphabetic"] as string[])
+                {
+                <a href='javascript:getAdvertsByFirstLetter("@s")' style="font-size:20px;" >
+                    @s
+                </a>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-9 col-xs-offset-3">
+            @{
+                foreach (Smekay24.Advert s in ViewData["adverts"] as List<Smekay24.Advert>)
+                {
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src="~/images/mob.jpg" style="width: 50%;" />
+                    </div>
+
+                    <div class="col-xs-6">
+                        <p>@s.Title</p>
+                        <p>@s.CCode</p>
+                        <p>@s.Price</p>
+                        <p>@s.Date</p>
+                    </div>
+                </div>
+                
+                <hr />
+                
+                }
+            }
+        </div>
+    </div>
+
+</div>
