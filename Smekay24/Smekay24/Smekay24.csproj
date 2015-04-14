@@ -270,12 +270,9 @@
   <ItemGroup>
     <Content Include="Views\Advert\AddAdvert.cshtml" />
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <Content Include="Views\Advert\GetAdvertsFromCategory.cshtml" />
   </ItemGroup>
-=======
->>>>>>> 17ada97e75846b4f01b17748f5d6879c136fd1a5
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
