@@ -208,6 +208,7 @@
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\Contacts\Contacts.cshtml" />
     <Content Include="Views\Rules\Rules.cshtml" />
+    <Content Include="Views\Advert\GetAdvert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,12 +275,9 @@
   <ItemGroup>
     <Content Include="Views\Advert\AddAdvert.cshtml" />
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <Content Include="Views\Advert\GetAdvertsFromCategory.cshtml" />
   </ItemGroup>
-=======
->>>>>>> ec6cbb5ef1d557d59fd9ea9a3830c1d3d58d9adb
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

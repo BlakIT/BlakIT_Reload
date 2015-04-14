@@ -37,7 +37,7 @@ namespace Smekay24.Controllers
                 if (img != null)
                 {
                     string fileName = System.IO.Path.GetFileName(img.FileName);
-                    img.SaveAs(Server.MapPath("~/Files/" + fileName));
+                    //img.SaveAs(Server.MapPath("~/Files/" + fileName));
                 }
             }
 
@@ -87,6 +87,15 @@ namespace Smekay24.Controllers
             ViewData["adverts"] = db.Advert.Where(x => x.Title.ToUpper().Contains(search.ToUpper())).ToList();
 
             return View("GetAdvertsFromCategory");
+        }
+
+        public ActionResult GetAdvertByID(int id)
+        {
+            ViewData["alphabetic"] = new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" };
+            ViewData["category"] = db.Advert_Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.ACCode.ToString() }).ToList();
+
+            Advert adv = db.Advert.FirstOrDefault(x => x.ACode == id);
+            return View("GetAdvert",adv);
         }
 
 
