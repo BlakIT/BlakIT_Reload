@@ -1,0 +1,35 @@
+﻿@model Smekay24.Models.UserFormModel
+@{
+    ViewBag.Title = "AdminUsers";
+    Layout = "~/Views/Admin/AdminLayout.cshtml";
+}
+<style>
+    .banned {
+        background-color:lightpink;
+    }
+    </style>
+<h2>AdminUsers</h2>
+<div>
+    <table data-toggle="table" class="table table-hover">
+        <tr>
+            <th>Почта</th>
+            <th>Имя</th>
+            <th>Город</th>
+            <th>Контактное лицо</th>
+            <th>Телефон</th>
+            <th>Бан</th>
+            <th>Удаление</th>
+        </tr>
+        @foreach (var user in Model.Rows){         
+        <tr class="@user.Banned">
+            <td>@user.Email</td>
+            <td>@user.Name</td>
+            <td>@user.City</td>
+            <td>@user.Contacts</td>
+            <td>@user.Phones</td>
+            <td>@Html.ActionLink(user.BannedMessage, "BanUser", new { code = user.Code })</td>
+            <td>@Html.ActionLink("удалить", "DeleteUser", new { code = user.Code })<td>
+        </tr>
+        } 
+    </table>
+</div>

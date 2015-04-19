@@ -1,0 +1,1 @@
+alter table Users  add Banned int

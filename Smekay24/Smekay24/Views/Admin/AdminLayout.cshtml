@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "AdminPanel";
+    Layout = null;
+}
+
+<h2 style="text-align: center;">Управление сайтом</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Site.css" rel="stylesheet" />
+
+    <style>
+        .editor-blok {
+        }
+
+        .editor-label {
+            padding-top: 15px;
+            float: left;
+        }
+
+        .editor-field {
+            width: 150px;
+            padding-top: 15px;
+            padding-left: 260px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div style="float: left; padding-left: 80px;">
+            <ul>
+                <li>
+                    <a>@Html.ActionLink("Управление пользователями", "AdminUsers", "Admin", null, null)</a>
+                </li>
+            </ul>
+        </div>
+        <section id="main">
+            @RenderBody()
+        </section>
+    </div>
+</body>
+</html>
