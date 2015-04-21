@@ -17,6 +17,7 @@ namespace Smekay24
         public Users()
         {
             this.Notification = new HashSet<Notification>();
+            this.Role = (int)Smekay24.Models.Constants.UserRole.Simple;
         }
     
         public int UCode { get; set; }
@@ -30,6 +31,7 @@ namespace Smekay24
         public Nullable<int> Notifications { get; set; }
         public string Contacts { get; set; }
         public Nullable<int> Banned { get; set; }
+        public Nullable<int> Role { get; set; }
     
         public virtual City City { get; set; }
         public virtual ICollection<Notification> Notification { get; set; }

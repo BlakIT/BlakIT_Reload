@@ -154,9 +154,10 @@
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryCover.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\PCSettingsModel.cs" />
     <Compile Include="Models\RegistrationFormModel.cs" />
-    <Compile Include="Models\UsreRowData.cs" />
+    <Compile Include="Models\AdminModels.cs" />
     <Compile Include="Notification.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
@@ -213,6 +214,7 @@
     <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\AdminLayout.cshtml" />
     <Content Include="Views\Admin\AdminUsers.cshtml" />
+    <Content Include="Views\Admin\AdminAdverts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

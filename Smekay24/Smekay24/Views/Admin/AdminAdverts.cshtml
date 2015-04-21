@@ -1,0 +1,24 @@
+﻿@model  List<Smekay24.Models.AdvertRowData>
+@{
+    ViewBag.Title = "AdminAdverts";
+    Layout = "~/Views/Admin/AdminLayout.cshtml";
+}
+
+<div>
+    <table data-toggle="table" class="table table-hover">
+        <tr>
+            <th>Автор</th>
+            <th>Дата подачи</th>
+            <th>Описание</th>
+            <th>Просмотр</th>
+        </tr>
+        @foreach (var advert in Model){         
+        <tr>
+            <td>@advert.Author</td>
+            <td>@advert.Date</td>
+            <td>@advert.Title</td>
+            <td>@Html.ActionLink("просмотреть","GetAdvertByID" ,"Advert",new { id = advert.Code },null)<td>
+        </tr>
+        } 
+    </table>
+</div>

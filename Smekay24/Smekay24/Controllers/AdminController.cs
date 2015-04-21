@@ -57,5 +57,17 @@ namespace Smekay24.Controllers
             return RedirectToAction("AdminUsers", "Admin", null);
         }
 
+        public ActionResult AdminAdverts()
+        {
+            List<AdvertRowData> model = new List<AdvertRowData>();
+            model.AddRange(db.Advert.Where(x => x.Status == (int)Constants.AdvertStatus.NotAllowed).Select(x => new AdvertRowData() { 
+            Author = db.Users.FirstOrDefault(u=>u.UCode == x.UCode).Email,
+            Date = (DateTime)x.Date,
+            Title = x.Description,
+            Code = x.ACode
+            }));
+            return View(model);
+        }
+
     }
 }

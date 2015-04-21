@@ -21,4 +21,13 @@ namespace Smekay24.Models
     {
         public List<UserRowData> Rows { get; set; }        
     }
+
+    public class AdvertRowData
+    {
+        public string Author { get; set; }
+        public DateTime Date { get; set; }
+        public string Title { get; set; }
+        public int Code { get; set; }
+        
+    }
 }

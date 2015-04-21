@@ -30,12 +30,16 @@
 </head>
 <body>
     <div>
-        <div style="float: left; padding-left: 80px;">
-            <ul>
-                <li>
-                    <a>@Html.ActionLink("Управление пользователями", "AdminUsers", "Admin", null, null)</a>
-                </li>
-            </ul>
+        <div>
+            <div style="float: left; padding-left: 80px;">
+                <a>@Html.ActionLink("Управление пользователями", "AdminUsers", "Admin", null, null)</a>
+            </div>
+            <div style="float: left; padding-left: 80px;">
+                <a>@Html.ActionLink("Управление объявлениями", "AdminAdverts", "Admin", null, null)</a>
+            </div>
+            <div style="float: left; padding-left: 80px;">
+                <a>@Html.ActionLink("Управление пользователями", "AdminUsers", "Admin", null, null)</a>
+            </div>
         </div>
         <section id="main">
             @RenderBody()

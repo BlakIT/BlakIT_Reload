@@ -126,6 +126,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Contacts" Type="nvarchar" MaxLength="200" />
           <Property Name="Banned" Type="int" />
+          <Property Name="Role" Type="int" />
         </EntityType>
         <Association Name="Advert_fk2">
           <End Role="Advert_Category" Type="Хранилище SmekayModel.Advert_Category" Multiplicity="0..1" />
@@ -336,6 +337,7 @@
           <NavigationProperty Name="Notification" Relationship="SmekayModel.Notification_fk1" FromRole="Users" ToRole="Notification" />
           <Property Type="String" Name="Contacts" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Banned" />
+          <Property Type="Int32" Name="Role" />
         </EntityType>
         <Association Name="Advert_fk2">
           <End Role="Advert_Category" Type="SmekayModel.Advert_Category" Multiplicity="0..1" />
@@ -497,6 +499,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SmekayModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Banned" ColumnName="Banned" />
                 <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="UCode" ColumnName="UCode" />
