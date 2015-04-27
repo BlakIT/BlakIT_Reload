@@ -29,15 +29,15 @@
     <div class="row">
         <div class="col-xs-4">
             <ul class="topUl">
-               <li>
-                        <a href="@Url.Action("Index","Home")">Главная</a>
-                    </li>
-                    <li>
-                        <a>Мои обьявления</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("AddAdvert", "Advert")">Подать обьявления</a>
-                    </li>
+                <li>
+                    <a href="@Url.Action("Index", "Home")">Главная</a>
+                </li>
+                <li>
+                    <a>Мои обьявления</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("AddAdvert", "Advert")">Подать обьявления</a>
+                </li>
             </ul>
         </div>
         <div class="col-xs-4 col-xs-offset-4">
@@ -119,9 +119,9 @@
     </div>
 
 
-    <div class="row" style="margin-top:40px;">
+    <div class="row" style="margin-top: 40px;">
 
-        <div class="col-xs-6 col-xs-offset-2" >
+        <div class="col-xs-6 col-xs-offset-2">
             <img src="~/images/mob.jpg" height="250" />
             <img src="~/images/mob.jpg" height="100" />
             <img src="~/images/mob.jpg" height="100" />
@@ -130,24 +130,39 @@
         <div class="col-xs-4">
             <h2>@Model.Title</h2>
             <p>@Model.CCode</p>
-            <p style="color:green;">@Model.Price  руб.</p>
+            <p style="color: green;">@Model.Price  руб.</p>
             @{if (Smekay24.WebAPI.UserSession.IsUserLogged)
-                {
-                    <p>@Model.Contact</p>
-                    <p>@Model.Email</p>
-                    <p>@Model.Phone</p>
-                }
+              {
+                <p>@Model.Contact</p>
+                <p>@Model.Email</p>
+                <p>@Model.Phone</p>
+              }
             }
         </div>
 
     </div>
-    @{if (Smekay24.WebAPI.UserSession.IsUserLogged){
-    <div class="row" style="margin-top:30px;">
-        <div class="col-xs-10 col-xs-offset-2">
-            <p>Предложить свою цену <input type="text" id="myPrice" /> <input type="button" value="Отправить продавцу" /></p>
+    @{if (Smekay24.WebAPI.UserSession.IsUserLogged)
+      {
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-xs-10 col-xs-offset-2">
+                <p>
+                    Предложить свою цену
+                    <input type="text" id="myPrice" />
+                    <input type="button" value="Отправить продавцу" />
+                </p>
+            </div>
         </div>
-    </div>
-    }}
+      }}
+    @if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin &&
+        Model.Status == (int)Smekay24.Models.Constants.AdvertStatus.NotAllowed)
+    {
+        <a>@Html.ActionLink("Допустить объявление", "AllowAdvert", "Advert", new { code = Model.ACode }, null)</a>
+    }
 
+    @if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin &&
+        Model.Status == (int)Smekay24.Models.Constants.AdvertStatus.Allowed)
+    {
+        <a>@Html.ActionLink("Запретить объявление", "ForbidAdvert", "Advert", new { code = Model.ACode }, null)</a>
+    }
 </div>
 

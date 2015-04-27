@@ -14,22 +14,21 @@
 
     <style type="text/css">
         .categoryBlock {
-            border:1px solid gray;
-            border-radius:20px;
-            min-height : 200px;
+            border: 1px solid gray;
+            border-radius: 20px;
+            min-height: 200px;
             margin-top: 30px;
         }
 
-        .categoryBlock input{
-            font-size: 12px;
-        }
+            .categoryBlock input {
+                font-size: 12px;
+            }
 
         .cat {
-            height:60px;
-              background: url("/images/autoCat.jpg") no-repeat;
+            height: 60px;
+            background: url("/images/autoCat.jpg") no-repeat;
             background-size: auto 60px;
         }
-
     </style>
 
     <script type="text/javascript">
@@ -49,10 +48,10 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-xs-4" >
+            <div class="col-xs-4">
                 <ul class="topUl">
                     <li>
-                        <a href="@Url.Action("Index","Home")">Главная</a>
+                        <a href="@Url.Action("Index", "Home")">Главная</a>
                     </li>
                     <li>
                         <a>Мои обьявления</a>
@@ -62,7 +61,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-6 col-xs-offset-2" >
+            <div class="col-xs-5 col-xs-offset-3">
                 <ul class="topUl">
                     <li>
                         @{
@@ -72,7 +71,7 @@
                             }
                             else
                             {
-                           <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Email, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
+                            <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Email, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
                             }
                         }
                     </li>
@@ -80,7 +79,7 @@
                         @{
                             if (@Smekay24.WebAPI.UserSession.IsUserLogged)
                             {
-                            <a>@Html.ActionLink("Выход", "Logout","Login",null,null)</a>
+                            <a>@Html.ActionLink("Выход", "Logout", "Login", null, null)</a>
                             }
                             else
                             {
@@ -89,27 +88,35 @@
                         }
                     </li>
                     <li>
-                         <a>@Html.ActionLink("Правила", "Rules", "Rules", null, null)</a>
+                        <a>@Html.ActionLink("Правила", "Rules", "Rules", null, null)</a>
                     </li>
                     <li>
-                       <a>@Html.ActionLink("Контакты", "Contacts", "Contacts", null, null)</a>
+                        <a>@Html.ActionLink("Контакты", "Contacts", "Contacts", null, null)</a>
                     </li>
-                    <li>
-                       <a>@Html.ActionLink("Управление сайтом", "Admin", "Admin", null, null)</a>
-                    </li>
+
+
+                    @{if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin)
+                      {
+                        <li>
+                            <a>@Html.ActionLink("Управление сайтом", "Admin", "Admin", null, null)</a>
+                        </li>                    
+                      }
+                    }
+
+
                 </ul>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-4 col-xs-offset-4">
-                <h1 style="text-align:center;">smekay.center</h1>
-                <h5  style="text-align:center;">Проходите по любому адресу</h5>
+                <h1 style="text-align: center;">smekay.center</h1>
+                <h5 style="text-align: center;">Проходите по любому адресу</h5>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-xs-5 col-xs-offset-1" style="border:1px solid black; border-radius:15px; text-align:center;">
+            <div class="col-xs-5 col-xs-offset-1" style="border: 1px solid black; border-radius: 15px; text-align: center;">
                 <div>
                     <h2>Смекай24.рф</h2>
                     <h3>Здесь Вы можете продать любой Б\У товар</h3>
@@ -117,11 +124,11 @@
                     <h3>ВСЕ Б\У ТОВАРЫ ОТ А до Я</h3>
                 </div>
             </div>
-            <div class="col-xs-4" style="border:1px solid black; border-radius:15px; text-align:center; margin-left:30px;">
-                    <h2>Smekay24.ru</h2>
-                    <h3>Smekay.net</h3>
-                    <h3>Знакомства в вашем городе</h3>
-                    <h3>И ПО ВСЕЙ РОССИИ</h3>
+            <div class="col-xs-4" style="border: 1px solid black; border-radius: 15px; text-align: center; margin-left: 30px;">
+                <h2>Smekay24.ru</h2>
+                <h3>Smekay.net</h3>
+                <h3>Знакомства в вашем городе</h3>
+                <h3>И ПО ВСЕЙ РОССИИ</h3>
             </div>
         </div>
 
@@ -135,110 +142,122 @@
             </div>
         </div>
 
-        <div class="row">   <!-- Список категорий -->
+        <div class="row">
+            <!-- Список категорий -->
             <div class="col-xs-11 col-xs-offset-1">
-            @{
-                foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
-                {
+                @{
+                    foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
+                    {
                     <a href="#" style="border-right:1px solid black; margin-left:10px; padding-right:10px;" onclick="getCatAdverts('@cat.Text')"  >@cat.Text </a>                     
+                    }
                 }
-            }
             </div>
         </div>
 
-        <div class="row" style="margin-top:10px;">    <!-- Поиск -->
-            <div class="col-xs-8 col-xs-offset-2" >
-             <b > Поиск</b> <input style="width:40%;" type="text" name="search" id="search" /> <b style="margin-left:40px;margin-right:40px;">в</b> 
+        <div class="row" style="margin-top: 10px;">
+            <!-- Поиск -->
+            <div class="col-xs-8 col-xs-offset-2">
+                <b>Поиск</b>
+                <input style="width: 40%;" type="text" name="search" id="search" />
+                <b style="margin-left: 40px; margin-right: 40px;">в</b>
                 @Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>)
-                <input style="margin-left:40px;" type="submit" name="searBut" id="searchBut" value="Поиск"/>
+                <input style="margin-left: 40px;" type="submit" name="searBut" id="searchBut" value="Поиск" />
             </div>
         </div>
 
-        <div class="row" style=" margin-top:20px;" >    <!-- Выбор региона -->
-            <div class="col-xs-10 col-xs-offset-1" >
+        <div class="row" style="margin-top: 20px;">
+            <!-- Выбор региона -->
+            <div class="col-xs-10 col-xs-offset-1">
                 <fieldset>
-                    <legend style="margin-bottom:0; border:0;">Выберите регион</legend>
-    
-                        <div class="row" style="border: 1px solid silver; padding:10px;">
+                    <legend style="margin-bottom: 0; border: 0;">Выберите регион</legend>
+
+                    <div class="row" style="border: 1px solid silver; padding: 10px;">
                         @{
                             int cols = 0;
                             string text = "";
-                            foreach(Smekay24.City city in (List<Smekay24.City>)ViewData["cities"])
+                            foreach (Smekay24.City city in (List<Smekay24.City>)ViewData["cities"])
                             {
-                                <div class="col-xs-2" style="margin-top:10px;">
-                                    <a href="#">@city.Name</a>
-                                </div>
+                            <div class="col-xs-2" style="margin-top: 10px;">
+                                <a href="#">@city.Name</a>
+                            </div>
 
                                 
                             }
                         }
-                        </div>
-                    
+                    </div>
+
                 </fieldset>
             </div>
         </div>
 
-        <div class="row" style="margin-top:30px;">     <!-- Категории и последние обьявления -->
+        <div class="row" style="margin-top: 30px;">
+            <!-- Категории и последние обьявления -->
 
             <div class="col-xs-6 col-xs-offset-1">
-                
+
                 @{
                     List<Smekay24.Models.CategoryCover> list = (List<Smekay24.Models.CategoryCover>)ViewData["categoryAdverts"];
                     int count = list.Count;
-                    for (int i = 0; i < count; i += 3 )
+                    for (int i = 0; i < count; i += 3)
                     {
-                        <div class="row">
-                            <div class="col-xs-3 categoryBlock">
-                                <h4>@list[i].Name</h4>
-                                <div class="cat @list[i].Name"></div>
-                                <a href="#" >@list[i].CountAdvert объявлений</a>
-                                <p>@list[i].Desc</p>
-                                <input type="button" value="Подать объявление" onclick="window.location.href='@Url.Action("AddAdvert","Advert")'">
-                            </div>
-
-                            @if( i + 1 < count){
-                            <div class="col-xs-3 col-xs-offset-1  categoryBlock">
-                                <h4>@list[i+1].Name</h4>
-                                <div class="cat @list[i+1].Name"></div>
-                                <a href="#" >@list[i+1].CountAdvert объявлений</a>
-                                <p>@list[i+1].Desc</p>
-                                <input type="button" value="Подать объявление" onclick="window.location.href='@Url.Action("AddAdvert","Advert")'">
-                            </div>
-                            }
-
-                            @if( i + 2 < count){
-                            <div class="col-xs-3 col-xs-offset-1 categoryBlock">
-                                <h4>@list[i+2].Name</h4>
-                                <div class="cat @list[i+2].Name"></div>
-                                <a href="#" >@list[i+2].CountAdvert объявлений</a>
-                                <p>@list[i+2].Desc</p>
-                                <input type="button" value="Подать объявление" onclick="window.location.href='@Url.Action("AddAdvert","Advert")'">
-                            </div>
-                            }
+                    <div class="row">
+                        <div class="col-xs-3 categoryBlock">
+                            <h4>@list[i].Name</h4>
+                            <div class="cat @list[i].Name"></div>
+                            <a href="#">@list[i].CountAdvert объявлений</a>
+                            <p>@list[i].Desc</p>
+                            <input type="button" value="Подать объявление" onclick="window.location.href='@Url.Action("AddAdvert", "Advert")    '">
                         </div>
+
+                        @if (i + 1 < count)
+                        {
+                            <div class="col-xs-3 col-xs-offset-1  categoryBlock">
+                                <h4>@list[i + 1].Name</h4>
+                                <div class="cat @list[i + 1].Name"></div>
+                                <a href="#">@list[i + 1].CountAdvert объявлений</a>
+                                <p>@list[i + 1].Desc</p>
+                                <input type="button" value="Подать объявление" onclick="window.location.href='@Url.Action("AddAdvert", "Advert")    '">
+                            </div>
+                        }
+
+                        @if (i + 2 < count)
+                        {
+                            <div class="col-xs-3 col-xs-offset-1 categoryBlock">
+                                <h4>@list[i + 2].Name</h4>
+                                <div class="cat @list[i + 2].Name"></div>
+                                <a href="#">@list[i + 2].CountAdvert объявлений</a>
+                                <p>@list[i + 2].Desc</p>
+                                <input type="button" value="Подать объявление" onclick="window.location.href='@Url.Action("AddAdvert", "Advert")    '">
+                            </div>
+                        }
+                    </div>
                     }
                 }
-                
+
 
             </div>
 
-            <div class="col-xs-4" style="border:1px solid silver; border-radius:20px;   top: 30px;">
-                <div class="col-xs-10 col-xs-offset-2"><h3 style="margin:0;">Последние обьявления</h3></div>
+            <div class="col-xs-4" style="border: 1px solid silver; border-radius: 20px; top: 30px;">
+                <div class="col-xs-10 col-xs-offset-2">
+                    <h3 style="margin: 0;">Последние обьявления</h3>
+                </div>
 
                 @{
                     foreach (Smekay24.Advert adv in (List<Smekay24.Advert>)ViewData["adverts"])
                     {
-                        <div class="row" style="border-bottom:1px solid silver;">
-                            <div class="col-xs-6">
-                                <a href="@Url.Action("GetAdvertByID", "Advert", new { id = adv.ACode })"> <img src="~/images/mob.jpg" style="width: 90%;" /> </a>
-                            </div>        
-                    
-                            <div class="col-xs-6">
-                                <p>@adv.Title</p>
-                                @adv.Price
-                                <p>@adv.Date</p>
-                            </div>                    
-                        </div> 
+                    <div class="row" style="border-bottom: 1px solid silver;">
+                        <div class="col-xs-6">
+                            <a href="@Url.Action("GetAdvertByID", "Advert", new { id = adv.ACode })">
+                                <img src="~/images/mob.jpg" style="width: 90%;" />
+                            </a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <p>@adv.Title</p>
+                            @adv.Price
+                            <p>@adv.Date</p>
+                        </div>
+                    </div> 
                     }
                 }
 

@@ -17,7 +17,6 @@ namespace Smekay24
         public Users()
         {
             this.Notification = new HashSet<Notification>();
-            this.Role = (int)Smekay24.Models.Constants.UserRole.Simple;
         }
     
         public int UCode { get; set; }

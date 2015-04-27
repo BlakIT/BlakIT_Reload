@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smekay24.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -98,6 +99,26 @@ namespace Smekay24.Controllers
             return View("GetAdvert",adv);
         }
 
+        public ActionResult AllowAdvert(int code)
+        {
+            ViewData["alphabetic"] = new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" };
+            ViewData["category"] = db.Advert_Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.ACCode.ToString() }).ToList();
 
+            Advert adv = db.Advert.FirstOrDefault(x => x.ACode == code);
+            adv.Status = (int)Constants.AdvertStatus.Allowed;
+            db.SaveChanges();
+            return View("GetAdvert", adv);
+        }
+
+        public ActionResult ForbidAdvert(int code)
+        {
+            ViewData["alphabetic"] = new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" };
+            ViewData["category"] = db.Advert_Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.ACCode.ToString() }).ToList();
+
+            Advert adv = db.Advert.FirstOrDefault(x => x.ACode == code);
+            adv.Status = (int)Constants.AdvertStatus.NotAllowed;
+            db.SaveChanges();
+            return View("GetAdvert", adv);
+        }
     }
 }

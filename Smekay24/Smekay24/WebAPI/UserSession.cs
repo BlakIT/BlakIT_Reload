@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Smekay24.WebAPI
 {
-            
+
     public class UserData
     {
         public string Email { get; set; }
@@ -25,11 +25,11 @@ namespace Smekay24.WebAPI
 
         public static Users CurrentUser
         {
-            get 
-            { 
-                return (Users)HttpContext.Current.Session["CurrentUser"]; 
+            get
+            {
+                return (Users)HttpContext.Current.Session["CurrentUser"] ?? new Users();
             }
-            set 
+            set
             {
                 HttpContext.Current.Session["CurrentUser"] = value;
                 HttpContext.Current.Session["IsUserLogged"] = true;
@@ -38,20 +38,20 @@ namespace Smekay24.WebAPI
 
         public static bool IsUserLogged
         {
-            get 
-            { 
-                return (bool)(HttpContext.Current.Session["IsUserLogged"]?? false);
+            get
+            {
+                return (bool)(HttpContext.Current.Session["IsUserLogged"] ?? false);
             }
 
-            set 
-            { 
+            set
+            {
                 HttpContext.Current.Session["IsUserLogged"] = value;
             }
         }
 
         public static Users CheckPassword(string userEmail, string password, int? userCode = null)
         {
-            var users = db.Users.Where(x => x.Email.Equals(userEmail) && x.Password.Equals(password));
+            var users = db.Users.Where(x => x.Email.Equals(userEmail) && x.Password.Equals(password) && x.Banned!=1);
             return users.Any() ? users.First() : null;
         }
     }

@@ -215,6 +215,9 @@
     <Content Include="Views\Admin\AdminLayout.cshtml" />
     <Content Include="Views\Admin\AdminUsers.cshtml" />
     <Content Include="Views\Admin\AdminAdverts.cshtml" />
+    <Content Include="Views\Advert\GetAdvert.cshtml" />
+    <Content Include="Views\Advert\GetAdvertsFromCategory.cshtml" />
+    <Content Include="Views\Admin\Utils.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

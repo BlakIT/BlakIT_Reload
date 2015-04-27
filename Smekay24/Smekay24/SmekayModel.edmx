@@ -62,7 +62,7 @@
           <Key>
             <PropertyRef Name="ACCode" />
           </Key>
-          <Property Name="ACCode" Type="int" Nullable="false" />
+          <Property Name="ACCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="text" />
           <Property Name="Desc" Type="text" />
         </EntityType>
@@ -70,7 +70,7 @@
           <Key>
             <PropertyRef Name="CCode" />
           </Key>
-          <Property Name="CCode" Type="int" Nullable="false" />
+          <Property Name="CCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="text" />
           <Property Name="CoCode" Type="int" />
         </EntityType>
@@ -78,7 +78,7 @@
           <Key>
             <PropertyRef Name="CoCode" />
           </Key>
-          <Property Name="CoCode" Type="int" Nullable="false" />
+          <Property Name="CoCode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Country" Type="text" />
         </EntityType>
         <EntityType Name="Favorites">
