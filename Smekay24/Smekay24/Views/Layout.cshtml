@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-4 col-xs-offset-4">
+            <div class="col-xs-5 col-xs-offset-3">
                 <ul class="topUl">
                     <li>
                         @{
@@ -79,6 +79,13 @@
                     <li>
                         <a>@Html.ActionLink("Контакты", "Contacts", "Contacts", null, null)</a>
                     </li>
+                    @{if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin)
+                      {
+                        <li>
+                            <a>@Html.ActionLink("Управление сайтом", "Admin", "Admin", null, null)</a>
+                        </li>                    
+                      }
+                    }
                 </ul>
             </div>
         </div>

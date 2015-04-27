@@ -2,3 +2,10 @@
     ViewBag.Title = "Admin";
     Layout = "~/Views/Admin/AdminLayout.cshtml";
 }
+
+
+<div class="col-xs-5 col-xs-offset-4">
+    <h2>Зарегестрировано юзеров: @ViewData["usersCount"]</h2>
+    <h2>Из них забанено: @ViewData["bannedCount"]</h2>
+    <h2>Нерассмотренных объявлений: @ViewData["naAdverts"]</h2>
+</div>

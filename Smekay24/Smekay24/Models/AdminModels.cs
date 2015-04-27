@@ -30,4 +30,10 @@ namespace Smekay24.Models
         public int Code { get; set; }
         
     }
+
+    public class UtilsNewCityModel
+    {
+        public string NewCityName { get; set; }
+        public int NewCityCountry { get; set; }
+    }
 }
