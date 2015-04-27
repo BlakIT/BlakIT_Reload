@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Utils";
+    Layout = "~/Views/Admin/AdminLayout.cshtml";
+}
+<div class="col-xs-offset-2">
+    <div style="padding-bottom:50px;">
+        @using (Html.BeginForm("DeleteCity", "Admin", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Список городов</h4>
+                </div>
+                <div class="col-xs-3">
+                    @Html.DropDownList("code", ViewData["cities"] as List<SelectListItem>, new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input class="btn btn-info btn-block" type="submit" id="deleteCityBtn" value="Удалить выбранный город" />
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("AddCity", "Admin"))
+        {
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Название нового города</h4>
+                </div>
+                <div class="col-xs-3">
+                    @Html.TextBox("name","",new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Страна нового города</h4>
+                </div>
+                <div class="col-xs-3">
+                    @Html.DropDownList("cCode", ViewData["countries"] as List<SelectListItem>, new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input class="btn btn-info btn-block" type="submit" id="addCityBtn" value="Добавить город" />
+                </div>
+            </div>
+        }
+    </div>
+    <div style="padding-bottom:50px;">
+        @using (Html.BeginForm("DeleteCountry", "Admin", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Список стран</h4>
+                </div>
+                <div class="col-xs-3">
+                    @Html.DropDownList("code", ViewData["countries"] as List<SelectListItem>, new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input class="btn btn-info btn-block" type="submit" id="deleteCountryBtn" value="Удалить выбранную страну" />
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("AddCountry", "Admin"))
+        {
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Название новой страны</h4>
+                </div>
+                <div class="col-xs-3">
+                    @Html.TextBox("name","" ,new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input class="btn btn-info btn-block" type="submit" id="addCountryBtn" value="Добавить страну" />
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        @using (Html.BeginForm("DeleteCategory", "Admin", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Список категорий</h4>
+                </div>
+                <div class="col-xs-3">
+                    @Html.DropDownList("code", ViewData["categories"] as List<SelectListItem>, new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input class="btn btn-info btn-block" type="submit" id="deleteCategoryBtn" value="Удалить выбранную категорию" />
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("AddCategory", "Admin"))
+        {
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Название новой категории</h4>
+                </div>
+                <div class="col-xs-3">
+                    @Html.TextBox("name","" ,new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input class="btn btn-info btn-block" type="submit" id="addCategoryBtn" value="Добавить категорию" />
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
