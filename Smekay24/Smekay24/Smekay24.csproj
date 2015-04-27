@@ -182,6 +182,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SmekayModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>SmekayModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Users.cs">
       <DependentUpon>SmekayModel.tt</DependentUpon>
     </Compile>
@@ -215,6 +218,10 @@
     <Content Include="Views\Admin\AdminLayout.cshtml" />
     <Content Include="Views\Admin\AdminUsers.cshtml" />
     <Content Include="Views\Admin\AdminAdverts.cshtml" />
+    <Content Include="Views\Advert\GetAdvert.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Advert\GetAdvertsFromCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

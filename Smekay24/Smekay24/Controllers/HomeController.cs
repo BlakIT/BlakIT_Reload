@@ -25,8 +25,8 @@ namespace Smekay24.Controllers
             ViewData["category"] = categories;
             ViewData["cities"] = getCitiesByCountry(1);
             ViewData["adverts"] = getAdverts().Take(7).ToList();
-            ViewData["categoryAdverts"] = getCategorysCovers();
-            ViewData["allAsvertCount"] = getAllAdversOunt();
+            ViewData["categoryAdverts"] = getCategoriesCovers();
+            ViewData["allAsvertCount"] = getAllAdvertCount();
 
             return View();
         }
@@ -46,7 +46,7 @@ namespace Smekay24.Controllers
             return db.Advert.Where(x => x.ACCode == category.ACCode).ToList().Count();
         }
 
-        private List<CategoryCover> getCategorysCovers()
+        private List<CategoryCover> getCategoriesCovers()
         {
             List<CategoryCover> list = new List<CategoryCover>();
 
@@ -63,7 +63,7 @@ namespace Smekay24.Controllers
             return list;
         }
 
-        private int getAllAdversOunt()
+        private int getAllAdvertCount()
         {
             return db.Advert.Count();
         }

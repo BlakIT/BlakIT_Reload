@@ -18,7 +18,5 @@ namespace Smekay24
         public Nullable<int> AuthorCode { get; set; }
         public Nullable<int> RecipientCode { get; set; }
         public string Content { get; set; }
-    
-        public virtual Users Users { get; set; }
     }
 }

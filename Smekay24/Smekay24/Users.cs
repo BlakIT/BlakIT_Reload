@@ -14,26 +14,19 @@ namespace Smekay24
     
     public partial class Users
     {
-        public Users()
-        {
-            this.Notification = new HashSet<Notification>();
-            this.Role = (int)Smekay24.Models.Constants.UserRole.Simple;
-        }
-    
         public int UCode { get; set; }
         public Nullable<int> CCode { get; set; }
-        public string Name { get; set; }
         public string Phone { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
         public Nullable<int> News { get; set; }
         public Nullable<int> Reminders { get; set; }
         public Nullable<int> Notifications { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string Contacts { get; set; }
         public Nullable<int> Banned { get; set; }
         public Nullable<int> Role { get; set; }
     
         public virtual City City { get; set; }
-        public virtual ICollection<Notification> Notification { get; set; }
     }
 }

@@ -33,6 +33,7 @@ namespace Smekay24
         public DbSet<Images> Images { get; set; }
         public DbSet<Images_To_Advert> Images_To_Advert { get; set; }
         public DbSet<Notification> Notification { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Users> Users { get; set; }
     }
 }
