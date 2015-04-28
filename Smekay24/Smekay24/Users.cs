@@ -14,14 +14,6 @@ namespace Smekay24
     
     public partial class Users
     {
-<<<<<<< HEAD
-=======
-        public Users()
-        {
-            this.Notification = new HashSet<Notification>();
-        }
-    
->>>>>>> d14075c53b9f686c9cb1c1856287597f0fdf8279
         public int UCode { get; set; }
         public Nullable<int> CCode { get; set; }
         public string Phone { get; set; }

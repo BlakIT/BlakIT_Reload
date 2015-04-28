@@ -26,31 +26,60 @@
 <body>
     <div class="container-fluid">       
 
-        <div class="row">
-                <div class="col-xs-4" >
+       <div class="row">
+            <div class="col-xs-6">
                 <ul class="topUl">
                     <li>
-                        <a href="@Url.Action("Index","Home")">Главная</a>
+                        <a href="/"><img src="/images/smekay.jpg" width="220px" /></a>
                     </li>
                     <li>
-                        <a>Мои обьявления</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("AddAdvert", "Advert")">Подать обьявления</a>
+                         <button type="button" onclick="location.href='@Url.Action("AddAdvert", "Advert")'" style="margin-top:40px;" class="btn btn-info" id="submitForm" name="submitForm">Подать обьявления</button>                       
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-4 col-xs-offset-4" >
+            <div class="col-xs-6">
                 <ul class="topUl">
                     <li>
-                        <a>Уведомления 1</a>
+                        @{
+                            if (!@Smekay24.WebAPI.UserSession.IsUserLogged)
+                            {
+                            <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
+                            }
+                            else
+                            {
+                            <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Email, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
+                            }
+                        }
                     </li>
                     <li>
-                        <a>Избранное 2</a>
+                        @{
+                            if (@Smekay24.WebAPI.UserSession.IsUserLogged)
+                            {
+                            <a>@Html.ActionLink("Выход", "Logout", "Login", null, null)</a>
+                            }
+                            else
+                            {
+                            <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
+                            }                           
+                        }
                     </li>
                     <li>
-                        <a>Мои объявления</a>
+                        <a>@Html.ActionLink("Правила", "Rules", "Rules", null, null)</a>
                     </li>
+                    <li>
+                        <a>@Html.ActionLink("Контакты", "Contacts", "Contacts", null, null)</a>
+                    </li>
+
+
+                    @{if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin)
+                      {
+                        <li>
+                            <a>@Html.ActionLink("Управление сайтом", "Admin", "Admin", null, null)</a>
+                        </li>                    
+                      }
+                    }
+
+
                 </ul>
             </div>
         </div>
@@ -66,7 +95,7 @@
             </div>
         </div>
     
-        <div class="row">
+        <div class="row" style="padding-bottom:40px;">
 
             <div class="col-xs-8 col-xs-offset-2">
 

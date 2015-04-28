@@ -1,7 +1,6 @@
 .topUl li {
     display: inline;
     padding-left:10px;
-    border-right: 2px solid black;
 }
 
     .topUl :last-child {
