@@ -1,4 +1,10 @@
-﻿<script type="text/javascript">
+﻿@model List<Smekay24.Advert>
+@{
+    ViewBag.Title = "Смекай";
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<script type="text/javascript">
     function getCatAdverts(catrext) {
         window.location.href = '/Advert/GetAdvertsFromCategory?catText=' + catrext;//  GetAdvertsFromCategory           
     }
@@ -15,136 +21,90 @@
     }
 </style>
 
-<link href="~/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/css/Site.css" rel="stylesheet" />
+<body>
+    <div class="container-fluid" id="mainDiv">
 
-
-<script src="~/js/bootstrap.min.js"></script>
-<div class="container-fluid" id="mainDiv">
-
-    <div class="row">
-            <div class="col-xs-6">
-                <ul class="topUl">
-                    <li>
-                        <a href="/"><img src="/images/smekay.jpg" width="220px" /></a>
-                    </li>
-                    <li>
-                         <button type="button" onclick="location.href='@Url.Action("AddAdvert", "Advert")'" style="margin-top:40px;" class="btn btn-info" id="submitForm" name="submitForm">Подать обьявления</button>                       
-                    </li>
-                </ul>
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-5">
+                <h1>Смекай.рф</h1>
             </div>
-            <div class="col-xs-6">
-                <ul class="topUl">
-                    <li>
-                        @{
-                            if (!@Smekay24.WebAPI.UserSession.IsUserLogged)
-                            {
-                            <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
-                            }
-                            else
-                            {
-                            <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Email, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
-                            }
-                        }
-                    </li>
-                    <li>
-                        @{
-                            if (@Smekay24.WebAPI.UserSession.IsUserLogged)
-                            {
-                            <a>@Html.ActionLink("Выход", "Logout", "Login", null, null)</a>
-                            }
-                            else
-                            {
-                            <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
-                            }                           
-                        }
-                    </li>
-                    <li>
-                        <a>@Html.ActionLink("Правила", "Rules", "Rules", null, null)</a>
-                    </li>
-                    <li>
-                        <a>@Html.ActionLink("Контакты", "Contacts", "Contacts", null, null)</a>
-                    </li>
+        </div>
 
-
-                    @{if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin)
-                      {
+        <div class="row">
+            <!-- Список категорий -->
+            <div class="col-xs-11 col-xs-offset-1">
+                <ul class="menu">
+                    @{
+                        foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
+                        {
                         <li>
-                            <a>@Html.ActionLink("Управление сайтом", "Admin", "Admin", null, null)</a>
-                        </li>                    
-                      }
+                            <a href="#" onclick="getCatAdverts('@cat.Text')"  >@cat.Text </a>
+                        </li>		
+                        }	
                     }
-
-
                 </ul>
+
             </div>
         </div>
 
-    <div class="row">
-        <div class="col-xs-4 col-xs-offset-5">
-            <h1>Смекай24.РФ</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <!-- Список категорий -->
-        <div class="col-xs-11 col-xs-offset-1">
-            @{
-                foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
-                {
-                <a href="#" style="border-right:1px solid black; margin-left:10px; padding-right:10px;" onclick="getCatAdverts('@cat.Text')"  >@cat.Text </a>                     
-                }
-            }
-        </div>
-    </div>
-
-    <div class="row" style="margin-top: 10px;">
-        <!-- Поиск -->
-        <div class="col-xs-8 col-xs-offset-2">
-            <b>Поиск</b>
-            <input style="width: 40%;" type="text" name="search" id="search" />
-            <b style="margin-left: 40px; margin-right: 40px;">в</b>
-            @Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>)
-            <input style="margin-left: 40px;" type="submit" name="searBut" id="searchBut" value="Поиск" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-9 col-xs-offset-3">
-            @{
-                foreach (string s in ViewData["alphabetic"] as string[])
-                {
-                <a href='javascript:getAdvertsByFirstLetter("@s")' style="font-size:20px;" >
-                    @s
-                </a>
-                }
-            }
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-9 col-xs-offset-3">
-            @{
-                foreach (Smekay24.Advert s in ViewData["adverts"] as List<Smekay24.Advert>)
-                {
+        <div class="row" style="margin-top: 10px;">
+            <!-- Поиск -->
+            <div class="col-xs-8 col-xs-offset-2">
                 <div class="row">
+                    <div class="col-xs-1"><b>Поиск</b></div>
                     <div class="col-xs-5">
-                       <a href="@Url.Action("GetAdvertByID", "Advert", new { id = s.ACode })"> <img src="~/images/mob.jpg" style="width: 50%;" /> </a>
+                        <input type="text" name="search" class="form-control" id="search" />
                     </div>
-
-                    <div class="col-xs-6">
-                        <p><b>@s.Title</b></p>
-                        <p>@s.CCode</p>
-                        <p style="color:green;"><i>@s.Price</i></p>
-                        <p style="color:blue;">@s.Date</p>
+                    <div class="col-xs-1"><b>в</b></div>
+                    <div class="col-xs-3">@Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>, new { @class = "form-control" })</div>
+                    <div class="col-xs-2">
+                        <button type="submit" onclick="searchClick();" class="btn btn-danger btn-block" id="searchBtn" name="submitForm">Поиск</button>
                     </div>
                 </div>
-                
-                <hr />
-                
-                }
-            }
+            </div>
         </div>
-    </div>
 
-</div>
+        <div class="row">
+            <div class="col-xs-9 col-xs-offset-3">
+                @{
+                    foreach (string s in ViewData["alphabetic"] as string[])
+                    {
+                    <a href='javascript:getAdvertsByFirstLetter("@s")' style="font-size:20px;" >
+                        @s
+                    </a>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-9 col-xs-offset-3">
+                @{
+                    foreach (Smekay24.Advert s in Model)
+                    {
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <a href="@Url.Action("GetAdvertByID", "Advert", new { id = s.ACode })">
+                                <img src="@s.History" style="width: 50%;" />
+                            </a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <p><b>@s.Title</b></p>
+                            <p>@s.CCode</p>
+                            <p style="color: green;"><i>@s.Price</i> руб.</p>
+                            @{ string str = s.Date == null ? String.Empty : String.Format("{0:dd-MM-yyyy}", s.Date);  
+                                <p style="color: blue;">@str</p>
+                           }
+                        </div>
+                    </div>
+                
+                    <hr />
+                
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+</body>

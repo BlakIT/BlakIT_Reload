@@ -30,10 +30,10 @@ namespace Smekay24
         public DbSet<City> City { get; set; }
         public DbSet<Countries> Countries { get; set; }
         public DbSet<Favorites> Favorites { get; set; }
-        public DbSet<Images> Images { get; set; }
-        public DbSet<Images_To_Advert> Images_To_Advert { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Images> Images { get; set; }
+        public DbSet<Images_To_Advert> Images_To_Advert { get; set; }
     }
 }

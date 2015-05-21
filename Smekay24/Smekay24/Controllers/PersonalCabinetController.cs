@@ -17,8 +17,22 @@ namespace Smekay24.Controllers
         // GET: /PersonalCabinet/
         public ActionResult PersonalCabinetAdverts()
         {
-            ViewData["adverts"] = db.Advert.Where(x => x.UCode == UserSession.CurrentUser.UCode).ToList();
-            return View();
+            var items = db.Advert.Where(x => x.UCode == UserSession.CurrentUser.UCode).ToList();
+
+            foreach (Advert adv in items)
+            {
+                var image = (from imToAdv in db.Images_To_Advert
+                             join img in db.Images on imToAdv.ICode equals img.ICode
+                             where imToAdv.ACode == adv.ACode
+                             select img.Url).FirstOrDefault();
+
+                if (image == null)
+                    adv.History = "/images/static.jpg";
+                else
+                    adv.History = image.Substring(1);
+            }
+
+            return View(items);
         }
 
         [HttpGet]
@@ -56,6 +70,36 @@ namespace Smekay24.Controllers
             db.SaveChanges();
             ViewData["cities"] = db.City.Select(x => new SelectListItem() { Text = x.Name, Value = x.CCode.ToString() }).ToList();
             return View(form);
+        }
+
+        public ActionResult PersonalCabinetNotification()
+        {
+            var items = db.Notification.Where(x => x.RecipientCode == Smekay24.WebAPI.UserSession.CurrentUser.UCode).ToList();
+
+            return View(items);
+        }
+
+        public ActionResult ApplyNotification(int idNot)
+        {
+            var item = db.Notification.Where(x => x.NCode == idNot).FirstOrDefault();
+
+            Users author = db.Users.Where(x => x.UCode == item.AuthorCode).FirstOrDefault();
+
+            item.Content = "+" + item.Content + "Вы приняли предложение! Для согласования свяжитесь с пользователем " + author.Name + " ( Е-мэйл - " + author.Email + " | Телефон - " + author.Phone + ")";
+                
+            db.SaveChanges();
+
+            return RedirectToAction("PersonalCabinetNotification");
+        }
+
+        public ActionResult DenyNotification(int idNot)
+        {
+            var item = db.Notification.Where(x => x.NCode == idNot).FirstOrDefault();
+
+            db.Notification.Remove(item);
+            db.SaveChanges();
+
+            return RedirectToAction("PersonalCabinetNotification");
         }
 
         public ActionResult PersonalCabinetDelete()

@@ -65,7 +65,7 @@ namespace Smekay24.Controllers
             List<AdvertRowData> model = new List<AdvertRowData>();
             model.AddRange(db.Advert.Where(x => x.Status == (int)Constants.AdvertStatus.NotAllowed).Select(x => new AdvertRowData()
             {
-                Author = db.Users.FirstOrDefault(u => u.UCode == x.UCode).Email,
+                Author = x.UCode == 0 ? "Anonymous" : db.Users.FirstOrDefault(u => u.UCode == x.UCode).Email,
                 Date = (DateTime)x.Date,
                 Title = x.Description,
                 Code = x.ACode
@@ -78,6 +78,7 @@ namespace Smekay24.Controllers
             ViewData["cities"] = db.City.Select(x => new SelectListItem() { Text = x.Name, Value = x.CCode.ToString() }).ToList();
             ViewData["countries"] = db.Countries.Select(x => new SelectListItem() { Text = x.Country, Value = x.CoCode.ToString() }).ToList();
             ViewData["categories"] = db.Advert_Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.ACCode.ToString() }).ToList();
+
             return View("Utils");
         }
 
@@ -91,7 +92,7 @@ namespace Smekay24.Controllers
             };
             db.City.Add(c);
             db.SaveChanges();
-            return Utils();
+            return RedirectToAction("Utils");
         }
 
         [HttpPost]
@@ -100,7 +101,7 @@ namespace Smekay24.Controllers
             var c = db.City.FirstOrDefault(x => x.CCode == code);
             db.City.Remove(c);
             db.SaveChanges();
-            return Utils();
+            return RedirectToAction("Utils");
         }
 
         [HttpPost]
@@ -112,7 +113,7 @@ namespace Smekay24.Controllers
             };
             db.Countries.Add(c);
             db.SaveChanges();
-            return Utils();
+            return RedirectToAction("Utils");
         }
 
         [HttpPost]
@@ -121,7 +122,7 @@ namespace Smekay24.Controllers
             var c = db.Countries.FirstOrDefault(x => x.CoCode == code);
             db.Countries.Remove(c);
             db.SaveChanges();
-            return Utils();
+            return RedirectToAction("Utils");
         }
 
         [HttpPost]
@@ -133,16 +134,20 @@ namespace Smekay24.Controllers
             };
             db.Advert_Category.Add(c);
             db.SaveChanges();
-            return Utils();
+            return RedirectToAction("Utils");
         }
 
         [HttpPost]
         public ActionResult DeleteCategory(int code)
         {
+            foreach (Advert adv in db.Advert.Where(x => x.ACCode == code).ToList())
+                db.Advert.Remove(adv);
+
             var c = db.Advert_Category.FirstOrDefault(x => x.ACCode == code);
+
             db.Advert_Category.Remove(c);
             db.SaveChanges();
-            return Utils();
+            return RedirectToAction("Utils");
         }
     }
 }

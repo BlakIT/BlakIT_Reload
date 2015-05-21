@@ -1,88 +1,18 @@
 ﻿@model Smekay24.Advert
 @{
-    Layout = null;
+    ViewBag.Title = "Добавить Объявления";
+    Layout = "~/Views/Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AddAdvert</title>
-
-    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/Site.css" rel="stylesheet" />
+<style type="text/css">
+    #addForm .row {
+        margin-top: 10px;
+    }
+</style>
 
 
-    <script src="~/js/bootstrap.min.js"></script>
-
-    <style type="text/css">
-        #addForm .row {
-            margin-top:10px;
-        }
-    </style>
-    
-</head>
 <body>
-    <div class="container-fluid">       
-
-       <div class="row">
-            <div class="col-xs-6">
-                <ul class="topUl">
-                    <li>
-                        <a href="/"><img src="/images/smekay.jpg" width="220px" /></a>
-                    </li>
-                    <li>
-                         <button type="button" onclick="location.href='@Url.Action("AddAdvert", "Advert")'" style="margin-top:40px;" class="btn btn-info" id="submitForm" name="submitForm">Подать обьявления</button>                       
-                    </li>
-                </ul>
-            </div>
-            <div class="col-xs-6">
-                <ul class="topUl">
-                    <li>
-                        @{
-                            if (!@Smekay24.WebAPI.UserSession.IsUserLogged)
-                            {
-                            <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
-                            }
-                            else
-                            {
-                            <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Email, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
-                            }
-                        }
-                    </li>
-                    <li>
-                        @{
-                            if (@Smekay24.WebAPI.UserSession.IsUserLogged)
-                            {
-                            <a>@Html.ActionLink("Выход", "Logout", "Login", null, null)</a>
-                            }
-                            else
-                            {
-                            <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
-                            }                           
-                        }
-                    </li>
-                    <li>
-                        <a>@Html.ActionLink("Правила", "Rules", "Rules", null, null)</a>
-                    </li>
-                    <li>
-                        <a>@Html.ActionLink("Контакты", "Contacts", "Contacts", null, null)</a>
-                    </li>
-
-
-                    @{if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin)
-                      {
-                        <li>
-                            <a>@Html.ActionLink("Управление сайтом", "Admin", "Admin", null, null)</a>
-                        </li>                    
-                      }
-                    }
-
-
-                </ul>
-            </div>
-        </div>
+    <div class="container-fluid">
 
         <div class="row">
             <div class="col-xs-6 col-xs-offset-5">
@@ -94,127 +24,123 @@
                 <h5>Все объявление перед добавлением проверяются на соответсвие <a>правилам</a></h5>
             </div>
         </div>
-    
-        <div class="row" style="padding-bottom:40px;">
+
+        <div class="row" style="padding-bottom: 40px;">
 
             <div class="col-xs-8 col-xs-offset-2">
 
-                 @using (Html.BeginForm("AddAdvert", "Advert", FormMethod.Post, new { @id = "addForm", enctype = "multipart/form-data" }))
-                 {
-                     @Html.ValidationSummary(true)
+                @using (Html.BeginForm("AddAdvert", "Advert", FormMethod.Post, new { @id = "addForm", enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true)
 
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Название объявления</h4>
-                         </div>
-                         <div class="col-xs-6">
-                             @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Название объявления</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Контактное лицо</h4>
-                         </div>
-                         <div class="col-xs-6">
-                             @Html.TextBoxFor(model => model.Contact, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Контактное лицо</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.TextBoxFor(model => model.Contact, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Город</h4>
-                         </div>
-                         <div class="col-xs-6">
-                             @Html.DropDownListFor(m => m.CCode, ViewData["cities"] as List<SelectListItem>, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Город</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.DropDownListFor(m => m.CCode, ViewData["cities"] as List<SelectListItem>, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Телефоны</h4>
-                         </div>
-                         <div class="col-xs-6">
-                             @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Телефоны</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Электронная почта</h4>
-                         </div>
-                         <div class="col-xs-6">
-                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Электронная почта</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Категория</h4>
-                         </div>
-                         <div class="col-xs-6">
-                             @Html.DropDownListFor(model => model.ACCode, ViewData["category"] as List<SelectListItem>, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Категория</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.DropDownListFor(model => model.ACCode, ViewData["category"] as List<SelectListItem>, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Описание</h4>
-                         </div>
-                         <div class="col-xs-6">
-                             @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Описание</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>История товара</h4>
-                         </div>
-                         <div class="col-xs-6">
-                              @Html.TextAreaFor(model => model.History, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>История товара</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.TextAreaFor(model => model.History, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Цена</h4>
-                         </div>
-                         <div class="col-xs-3">
-                              @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Цена</h4>
+                        </div>
+                        <div class="col-xs-3">
+                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-4">
-                             <h4>Фотографии</h4>
-                             <p>Не более 5 фото</p>
-                         </div>
-                         <div class="col-xs-3">
-                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
-                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
-                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
-                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
-                             <input type="file" name="fileUpload" value="Загрузить фото"  ACCEPT="image/*"/><br />
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Фотографии</h4>
+                            <p>Не более 5 фото</p>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="file" name="fileUpload" value="Загрузить фото" accept="image/*" /><br />
+                            <input type="file" name="fileUpload" value="Загрузить фото" accept="image/*" /><br />
+                            <input type="file" name="fileUpload" value="Загрузить фото" accept="image/*" /><br />
+                            <input type="file" name="fileUpload" value="Загрузить фото" accept="image/*" /><br />
+                            <input type="file" name="fileUpload" value="Загрузить фото" accept="image/*" /><br />
+                        </div>
+                    </div>
                      
-                     <div class="row">
-                         <div class="col-xs-5">                             
-                              <button type="button" class="btn btn-info btn-block" id="viewNow">Предварительный просмотр</button>
-                         </div>
-                         <div class="col-xs-5">                             
-                              <button type="submit" class="btn btn-info btn-block" id="submitForm" name="submitForm">Добавить объявление</button>
-                         </div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-5">
+                            <button type="submit" class="btn btn-info btn-block" id="submitForm" name="submitForm">Добавить объявление</button>
+                        </div>
+                    </div>
                      
                      
-                 }
+                }
 
-            </div>      
+            </div>
 
         </div>
 
-    </div>  
+    </div>
 
 </body>
-</html>

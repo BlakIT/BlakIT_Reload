@@ -10,16 +10,16 @@
         <EntityTypeShape EntityType="SmekayModel.City" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SmekayModel.Countries" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmekayModel.Favorites" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmekayModel.Images" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmekayModel.Images_To_Advert" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmekayModel.Notification" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmekayModel.Notification" Width="1.5" PointX="6.125" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="SmekayModel.Advert_fk2" ManuallyRouted="false" />
         <AssociationConnector Association="SmekayModel.Favorites_fk1" ManuallyRouted="false" />
-        <AssociationConnector Association="SmekayModel.Images_To_Advert_fk1" ManuallyRouted="false" />
         <AssociationConnector Association="SmekayModel.City_fk0" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SmekayModel.sysdiagrams" Width="1.5" PointX="8.3514868413803569" PointY="23.832689728509955" />
         <EntityTypeShape EntityType="SmekayModel.Users" Width="1.5" PointX="7.9823973569937037" PointY="9.2851395501220324" />
         <AssociationConnector Association="SmekayModel.Users_fk0" />
+        <EntityTypeShape EntityType="SmekayModel.Images" Width="1.5" PointX="5.8047184840798" PointY="18.825342231814442" />
+        <EntityTypeShape EntityType="SmekayModel.Images_To_Advert" Width="1.5" PointX="8.68754874946901" PointY="0.11914591496770546" />
+        <AssociationConnector Association="SmekayModel.Images_To_Advert_fk1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

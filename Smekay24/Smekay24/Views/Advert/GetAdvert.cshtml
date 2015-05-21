@@ -1,16 +1,10 @@
 ﻿@model Smekay24.Advert
 
 
-<link href="~/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/css/Site.css" rel="stylesheet" />
-
-
-<script src="~/js/bootstrap.min.js"></script>
-<style type="text/css">
-    #mainDiv .row {
-        margin-bottom: 30px;
-    }
-</style>
+@{
+    ViewBag.Title = "Смекай";
+    Layout = "~/Views/Layout.cshtml";
+}
 
 <script type="text/javascript">
     function getCatAdverts(catrext) {
@@ -21,68 +15,44 @@
         window.location.href = '/Advert/GetAdvertsByLetter?letter=' + letter;
     }
 
+    function sendMessage() {
+        if ($('#myPrice').val() != '') {
+            $.ajax({
+                url: '@Url.Action("SendNotification", "Advert")',
+                type: "POST",
+                data: { advertID: $('#ACode').val(), price: $('#myPrice').val() },
+                success: function (data) {
+                    if (data) {
+                        alert('Ваше предложение отправлено!');
+                        $('#myPrice').val(" ");
+                    }
+                    else
+                        alert('Ошибка!');
+                }
+            });
+        }
+        else
+            alert('Предложите свою цену!');
+    }
+
 </script>
 
+<style type="text/css">
+    #mainDiv .row {
+        margin-bottom: 30px;
+    }
 
+    #infoAdvert {
+        padding-right: 30px;
+    }
+
+        #infoAdvert .row {
+            border-bottom: 1px solid rgb(188, 188, 188);
+        }
+</style>
+
+@Html.HiddenFor(model =>  model.ACode)
 <div class="container-fluid" id="mainDiv">
-
-    <div class="row">
-            <div class="col-xs-6">
-                <ul class="topUl">
-                    <li>
-                        <a href="/"><img src="/images/smekay.jpg" width="220px" /></a>
-                    </li>
-                    <li>
-                         <button type="button" onclick="location.href='@Url.Action("AddAdvert", "Advert")'" style="margin-top:40px;" class="btn btn-info" id="submitForm" name="submitForm">Подать обьявления</button>                       
-                    </li>
-                </ul>
-            </div>
-            <div class="col-xs-6">
-                <ul class="topUl">
-                    <li>
-                        @{
-                            if (!@Smekay24.WebAPI.UserSession.IsUserLogged)
-                            {
-                            <a>@Html.ActionLink("Вход", "Login", "Login", null, null)</a>
-                            }
-                            else
-                            {
-                            <a>@Html.ActionLink(Smekay24.WebAPI.UserSession.CurrentUser.Email, "PersonalCabinetAdverts", "PersonalCabinet", null, null)</a>
-                            }
-                        }
-                    </li>
-                    <li>
-                        @{
-                            if (@Smekay24.WebAPI.UserSession.IsUserLogged)
-                            {
-                            <a>@Html.ActionLink("Выход", "Logout", "Login", null, null)</a>
-                            }
-                            else
-                            {
-                            <a>@Html.ActionLink("Регистрация", "Registration", "Registration", null, null)</a>
-                            }                           
-                        }
-                    </li>
-                    <li>
-                        <a>@Html.ActionLink("Правила", "Rules", "Rules", null, null)</a>
-                    </li>
-                    <li>
-                        <a>@Html.ActionLink("Контакты", "Contacts", "Contacts", null, null)</a>
-                    </li>
-
-
-                    @{if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin)
-                      {
-                        <li>
-                            <a>@Html.ActionLink("Управление сайтом", "Admin", "Admin", null, null)</a>
-                        </li>                    
-                      }
-                    }
-
-
-                </ul>
-            </div>
-        </div>
 
     <div class="row">
         <div class="col-xs-4 col-xs-offset-5">
@@ -93,23 +63,34 @@
     <div class="row">
         <!-- Список категорий -->
         <div class="col-xs-11 col-xs-offset-1">
-            @{
-                foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
-                {
-                <a href="#" style="border-right:1px solid black; margin-left:10px; padding-right:10px;" onclick="getCatAdverts('@cat.Text')"  >@cat.Text </a>                     
+            <ul class="menu">
+                @{
+                    foreach (SelectListItem cat in (List<SelectListItem>)ViewData["category"])
+                    {
+                    <li>
+                        <a href="#" onclick="getCatAdverts('@cat.Text')"  >@cat.Text </a>
+                    </li>		
+                    }	
                 }
-            }
+            </ul>
+
         </div>
     </div>
 
     <div class="row" style="margin-top: 10px;">
         <!-- Поиск -->
         <div class="col-xs-8 col-xs-offset-2">
-            <b>Поиск</b>
-            <input style="width: 40%;" type="text" name="search" id="search" />
-            <b style="margin-left: 40px; margin-right: 40px;">в</b>
-            @Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>)
-            <input style="margin-left: 40px;" type="submit" name="searBut" id="searchBut" value="Поиск" />
+            <div class="row">
+                <div class="col-xs-1"><b>Поиск</b></div>
+                <div class="col-xs-5">
+                    <input type="text" name="search" class="form-control" id="search" />
+                </div>
+                <div class="col-xs-1"><b>в</b></div>
+                <div class="col-xs-3">@Html.DropDownList("Category", ViewData["category"] as List<SelectListItem>, new { @class = "form-control" })</div>
+                <div class="col-xs-2">
+                    <button type="submit" onclick="searchClick();" class="btn btn-danger btn-block" id="searchBtn" name="submitForm">Поиск</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -128,49 +109,115 @@
 
 
     <div class="row" style="margin-top: 40px;">
+        @{
+            List<string> images = (List<string>)ViewData["Images"];
+                
+            <div class="col-xs-6 col-xs-offset-2">
+                <div class="row">
+                    <img src="@images[0]" height="250" />
+                </div>
+                <div class="row">
+                    <img src="@images[1]" height="100" />
+                    <img src="@images[2]" height="100" />
+                    <img src="@images[3]" height="100" />
+                    <img src="@images[4]" height="100" />
+                </div>
+            </div>
+        }
 
-        <div class="col-xs-6 col-xs-offset-2">
-            <img src="~/images/mob.jpg" height="250" />
-            <img src="~/images/mob.jpg" height="100" />
-            <img src="~/images/mob.jpg" height="100" />
-        </div>
-
-        <div class="col-xs-4">
-            <h2><b>@Model.Title</b></h2>
-            <p>@Model.CCode</p>
-            <p style="color: green;"><i>@Model.Price</i>  руб.</p>
+        <div class="col-xs-4" id="infoAdvert">
+            <div class="row">
+                <h2><b>@Model.Title</b></h2>
+            </div>
+            <div class="row">
+                <h3 style="color: green;"><i>@Model.Price</i>  руб.</p></h3>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <b>Описание</b>
+                </div>
+                <div class="col-xs-11">
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <b>История</b>
+                </div>
+                <div class="col-xs-11">
+                    <p>@Model.History</p>
+                </div>
+            </div>
             @{if (Smekay24.WebAPI.UserSession.IsUserLogged)
               {
-                <p>@Model.Contact</p>
-                <p>@Model.Email</p>
-                <p>@Model.Phone</p>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <b>Контакт</b>
+                    </div>
+                    <div class="col-xs-11">
+                        <p>@Model.Contact</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <b>E-мэйл</b>
+                    </div>
+                    <div class="col-xs-11">
+                        <p>@Model.Email</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <b>Телефон</b>
+                    </div>
+                    <div class="col-xs-11">
+                        <p>@Model.Phone</p>
+                    </div>
+                </div>
+                
               }
             }
+            <div class="row">
+                    <div class="col-xs-5">
+                        <b>Дата размещения:</b>
+                    </div>
+                    <div class="col-xs-11">
+                        @{ string str = Model.Date == null ? String.Empty : String.Format("{0:dd-MM-yyyy}", Model.Date);  
+                           <p>@str</p>
+                           }
+                    </div>
+                </div>
         </div>
 
     </div>
+
     @{if (Smekay24.WebAPI.UserSession.IsUserLogged)
       {
-        <div class="row" style="margin-top: 30px;">
-            <div class="col-xs-10 col-xs-offset-2">
-                <p>
-                    Предложить свою цену
-                    <input type="text" id="myPrice" />
-                    <input type="button" value="Отправить продавцу" />
-                </p>
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-xs-10 col-xs-offset-1">
+                <div class="row" style="background-color: rgb(213, 208, 208); border-radius: 20px; padding-top: 10px; padding-bottom: 10px;">
+                    <div class="col-xs-3 col-xs-offset-1">
+                        <h4>Предложить свою цену</h4>
+                    </div>
+                    <div class="col-xs-4" style="margin-left: -50px;">
+                        <input type="text" id="myPrice" class="form-control" />
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="button" value="Отправить продавцу" onclick="sendMessage();" class="btn btn-danger btn-block" />
+                    </div>
+                </div>
             </div>
         </div>
       }}
     @if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin &&
         Model.Status == (int)Smekay24.Models.Constants.AdvertStatus.NotAllowed)
     {
-       <b> <a style="color:green;">@Html.ActionLink("Допустить объявление", "AllowAdvert", "Advert", new { code = Model.ACode }, null)</a></b>
+        <b><a style="color: green;">@Html.ActionLink("Допустить объявление", "AllowAdvert", "Advert", new { code = Model.ACode }, null)</a></b>
     }
 
     @if (Smekay24.WebAPI.UserSession.CurrentUser.Role == (int)Smekay24.Models.Constants.UserRole.Admin &&
         Model.Status == (int)Smekay24.Models.Constants.AdvertStatus.Allowed)
     {
-        <b><a style="color:red;">@Html.ActionLink("Запретить объявление", "ForbidAdvert", "Advert", new { code = Model.ACode }, null)</a></b>
+        <b><a style="color: red;">@Html.ActionLink("Запретить объявление", "ForbidAdvert", "Advert", new { code = Model.ACode }, null)</a></b>
     }
 </div>
-

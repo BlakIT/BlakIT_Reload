@@ -1,23 +1,31 @@
-﻿@{
+﻿@model List<Smekay24.Advert>
+@{
     ViewBag.Title = "PersonalCabinet";
     Layout = "~/Views/PersonalCabinet/PCabLayout.cshtml";
 }
 <div style="padding-left: 260px;">
     @{
-        foreach (Smekay24.Advert adv in (List<Smekay24.Advert>)ViewData["adverts"])
+        foreach (Smekay24.Advert s in Model)
         {
-        <div class="row" style="border-bottom: 1px solid silver;">
+        <div class="row">
             <div class="col-xs-5">
-                <img src="~/images/mob.jpg" style="width: 20%;" />
+                <a href="@Url.Action("GetAdvertByID", "Advert", new { id = s.ACode })">
+                    <img src="@s.History" style="width: 50%;" />
+                </a>
             </div>
 
-            <div class="col-xs-5">
-                <p>@adv.Title</p>
-                @adv.Price
-                <p>@adv.Date</p>
-                <p>@adv.Description</p>
+            <div class="col-xs-6">
+                <p><b>@s.Title</b></p>
+                <p>@s.CCode</p>
+                <p style="color: green;"><i>@s.Price</i> руб.</p>
+                @{ string str = s.Date == null ? String.Empty : String.Format("{0:dd-MM-yyyy}", s.Date);  
+                    <p style="color: blue;">@str</p>
+                }
             </div>
-        </div> 
+        </div>
+                
+        <hr />
+                
         }
     }
 </div>

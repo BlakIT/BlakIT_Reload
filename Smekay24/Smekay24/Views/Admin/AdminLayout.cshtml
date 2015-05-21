@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "AdminPanel";
-    Layout = null;
+    Layout = "~/Views/Layout.cshtml";
 }
 
 <h2 style="text-align: center;">Управление сайтом</h2>
@@ -40,9 +40,7 @@
             <div style="float: left; padding-left: 80px;">
                 <a>@Html.ActionLink("Утилиты", "Utils", "Admin", null, null)</a>
             </div>
-            <div style="float: left; padding-left: 80px;">
-                <a href="@Url.Action("Index", "Home")">Главная</a>
-            </div>
+            
         </div>
         <section id="main">
             @RenderBody()

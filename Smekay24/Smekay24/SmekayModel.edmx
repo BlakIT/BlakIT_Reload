@@ -89,7 +89,7 @@
           <Key>
             <PropertyRef Name="ICode" />
           </Key>
-          <Property Name="ICode" Type="binary" Nullable="false" MaxLength="1" />
+          <Property Name="ICode" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Url" Type="text" />
         </EntityType>
         <EntityType Name="Images_To_Advert">
@@ -205,8 +205,6 @@
           <EntitySet Name="City" EntityType="SmekayModel.City" />
           <EntitySet Name="Countries" EntityType="SmekayModel.Countries" />
           <EntitySet Name="Favorites" EntityType="SmekayModel.Favorites" />
-          <EntitySet Name="Images" EntityType="SmekayModel.Images" />
-          <EntitySet Name="Images_To_Advert" EntityType="SmekayModel.Images_To_Advert" />
           <EntitySet Name="Notification" EntityType="SmekayModel.Notification" />
           <AssociationSet Name="Advert_fk2" Association="SmekayModel.Advert_fk2">
             <End Role="Advert_Category" EntitySet="Advert_Category" />
@@ -215,10 +213,6 @@
           <AssociationSet Name="Favorites_fk1" Association="SmekayModel.Favorites_fk1">
             <End Role="Advert" EntitySet="Advert" />
             <End Role="Favorites" EntitySet="Favorites" />
-          </AssociationSet>
-          <AssociationSet Name="Images_To_Advert_fk1" Association="SmekayModel.Images_To_Advert_fk1">
-            <End Role="Advert" EntitySet="Advert" />
-            <End Role="Images_To_Advert" EntitySet="Images_To_Advert" />
           </AssociationSet>
           <AssociationSet Name="City_fk0" Association="SmekayModel.City_fk0">
             <End Role="Countries" EntitySet="Countries" />
@@ -229,6 +223,12 @@
           <AssociationSet Name="Users_fk0" Association="SmekayModel.Users_fk0">
             <End Role="City" EntitySet="City" />
             <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Images" EntityType="SmekayModel.Images" />
+          <EntitySet Name="Images_To_Advert" EntityType="SmekayModel.Images_To_Advert" />
+          <AssociationSet Name="Images_To_Advert_fk1" Association="SmekayModel.Images_To_Advert_fk1">
+            <End Role="Advert" EntitySet="Advert" />
+            <End Role="Images_To_Advert" EntitySet="Images_To_Advert" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Advert">
@@ -287,21 +287,6 @@
           <Property Name="ACode" Type="Int32" />
           <NavigationProperty Name="Advert" Relationship="SmekayModel.Favorites_fk1" FromRole="Favorites" ToRole="Advert" />
         </EntityType>
-        <EntityType Name="Images">
-          <Key>
-            <PropertyRef Name="ICode" />
-          </Key>
-          <Property Name="ICode" Type="Binary" Nullable="false" MaxLength="1" FixedLength="true" />
-          <Property Name="Url" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Images_To_Advert">
-          <Key>
-            <PropertyRef Name="ICode" />
-          </Key>
-          <Property Name="ICode" Type="Int32" Nullable="false" />
-          <Property Name="ACode" Type="Int32" />
-          <NavigationProperty Name="Advert" Relationship="SmekayModel.Images_To_Advert_fk1" FromRole="Images_To_Advert" ToRole="Advert" />
-        </EntityType>
         <EntityType Name="Notification">
           <Key>
             <PropertyRef Name="NCode" />
@@ -331,18 +316,6 @@
               <PropertyRef Name="ACode" />
             </Principal>
             <Dependent Role="Favorites">
-              <PropertyRef Name="ACode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Images_To_Advert_fk1">
-          <End Role="Advert" Type="SmekayModel.Advert" Multiplicity="0..1" />
-          <End Role="Images_To_Advert" Type="SmekayModel.Images_To_Advert" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Advert">
-              <PropertyRef Name="ACode" />
-            </Principal>
-            <Dependent Role="Images_To_Advert">
               <PropertyRef Name="ACode" />
             </Dependent>
           </ReferentialConstraint>
@@ -396,6 +369,33 @@
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="CCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ICode" />
+          </Key>
+          <Property Type="Int32" Name="ICode" Nullable="false" />
+          <Property Type="String" Name="Url" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Images_To_Advert">
+          <Key>
+            <PropertyRef Name="ICode" />
+          </Key>
+          <Property Type="Int32" Name="ICode" Nullable="false" />
+          <Property Type="Int32" Name="ACode" />
+          <NavigationProperty Name="Advert" Relationship="SmekayModel.Images_To_Advert_fk1" FromRole="Images_To_Advert" ToRole="Advert" />
+        </EntityType>
+        <Association Name="Images_To_Advert_fk1">
+          <End Type="SmekayModel.Advert" Role="Advert" Multiplicity="0..1" />
+          <End Type="SmekayModel.Images_To_Advert" Role="Images_To_Advert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advert">
+              <PropertyRef Name="ACode" />
+            </Principal>
+            <Dependent Role="Images_To_Advert">
+              <PropertyRef Name="ACode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -458,22 +458,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="SmekayModel.Images">
-              <MappingFragment StoreEntitySet="Images">
-                <ScalarProperty Name="ICode" ColumnName="ICode" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images_To_Advert">
-            <EntityTypeMapping TypeName="SmekayModel.Images_To_Advert">
-              <MappingFragment StoreEntitySet="Images_To_Advert">
-                <ScalarProperty Name="ICode" ColumnName="ICode" />
-                <ScalarProperty Name="ACode" ColumnName="ACode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Notification">
             <EntityTypeMapping TypeName="SmekayModel.Notification">
               <MappingFragment StoreEntitySet="Notification">
@@ -510,6 +494,22 @@
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="CCode" ColumnName="CCode" />
                 <ScalarProperty Name="UCode" ColumnName="UCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="SmekayModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ICode" ColumnName="ICode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images_To_Advert">
+            <EntityTypeMapping TypeName="SmekayModel.Images_To_Advert">
+              <MappingFragment StoreEntitySet="Images_To_Advert">
+                <ScalarProperty Name="ACode" ColumnName="ACode" />
+                <ScalarProperty Name="ICode" ColumnName="ICode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

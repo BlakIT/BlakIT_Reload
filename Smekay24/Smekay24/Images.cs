@@ -14,7 +14,7 @@ namespace Smekay24
     
     public partial class Images
     {
-        public byte[] ICode { get; set; }
+        public int ICode { get; set; }
         public string Url { get; set; }
     }
 }
